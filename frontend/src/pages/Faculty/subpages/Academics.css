@@ -1,0 +1,129 @@
+.container {
+  padding: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+body {
+  background-color: #f4f4f4;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #0A2647;
+  padding: 20px;
+  border-radius: 20px;
+  margin-bottom: 30px;
+}
+
+.Eventbar {
+  font-size: 35px;
+  color: #E3F6FF;
+  text-align: center;
+}
+
+.academics-box {
+  width: 30%;
+  padding: 20px;
+  border: 2px solid #295F98;
+  border-radius: 10px;
+  background-color: #f5f7fa;
+  margin-bottom: 20px;
+}
+
+.academics-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.academics-box h2 {
+  color: #375a7f;
+  margin-bottom: 15px;
+  font-size: 26px;
+}
+
+.academics-box p {
+  margin: 8px 0;
+}
+
+p strong {
+  color: #333;
+  font-size: 15px;
+}
+
+#middle-view {
+  width: 30%;
+  padding: 20px;
+  border: 0px solid #ffffff;
+  border-radius: 10px;
+  background-color: #f5f7fa00;
+  margin-bottom: 20px;
+}
+
+.downloads {
+  width: 100%;
+  padding: 20px;
+  border: 2px solid #295F98;
+  border-radius: 10px;
+  background-color: #f5f7fa;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Button Styling */
+button {
+  background-color: #0A2647;
+  color: #E3F6FF;
+  font-size: 16px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button svg {
+  margin-right: 1px;
+  font-size: 18px;
+}
+
+button:hover {
+  background-color: #1E4A6A;
+  transform: translateY(-2px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .academics-container {
+    flex-direction: column;
+    align-items: center; /* Center the containers */
+  }
+
+  .academics-box {
+    width: 100%; /* Full width for smaller screens */
+    margin-bottom: 20px;
+  }
+
+  .details-box {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  #middle-view
+  {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}
