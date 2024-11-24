@@ -26,7 +26,7 @@ const Academics = () => {
 
         <div className="academics-box" id='middle-view'>
           <div className='downloads'>
-          <h2>Class Timetable:</h2>
+          <h2>Teaching Timetable:</h2>
           <button><FaDownload /></button>
           </div>
           <div className='downloads'>
