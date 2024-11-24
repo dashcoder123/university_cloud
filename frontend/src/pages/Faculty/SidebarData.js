@@ -27,15 +27,21 @@ export const SidebarData = [
     cName: 'nav-text'
   },
   {
-    title: 'Payment and Fees',
-    path: '/faculty/dashboard/payment',
-    icon: <FaIcons.FaReceipt />,
+    title: 'Teaching Material',
+    path: '/faculty/dashboard/material',
+    icon: <FaIcons.FaChalkboardTeacher />,
     cName: 'nav-text'
   },
   {
-    title: 'Results',
-    path: '/faculty/dashboard/results',
-    icon: <FaIcons.FaAward />,
+    title: 'Activities',
+    path: '/faculty/dashboard/activity',
+    icon: <FaIcons.FaDice />,
+    cName: 'nav-text'
+  },
+  {
+    title: 'Records',
+    path: '/faculty/dashboard/records',
+    icon: <FaIcons.FaRegClipboard />,
     cName: 'nav-text'
   }
 ];

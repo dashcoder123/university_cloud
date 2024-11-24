@@ -5,8 +5,9 @@ import Home from './subpages/Home.js';
 import Academics from './subpages/Academics';  
 import Events from './subpages/Events';
 import Notifications from './subpages/Notifications';
-import Payment from './subpages/Payment';
-import Results from './subpages/Results';
+import Activity from './subpages/Activity.js';
+import FacultyRecord from './subpages/EmploymentRecord.js';
+import TeachingMaterial from './subpages/TeachingMaterial.js';
 
 const FacultyDashboard = () => {
   return (
@@ -18,8 +19,9 @@ const FacultyDashboard = () => {
           <Route path="academics" element={<Academics />} />
           <Route path="events" element={<Events />} />
           <Route path="notifications" element={<Notifications />} />
-          <Route path="payment" element={<Payment />} />
-          <Route path="results" element={<Results />} />
+          <Route path="material" element={<TeachingMaterial />} />
+          <Route path="activity" element={<Activity />} />
+          <Route path="records" element={<FacultyRecord />} />
         </Routes>
       </div>
     </div>

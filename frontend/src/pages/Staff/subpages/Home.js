@@ -1,17 +1,17 @@
 import React from 'react';
 import './Home.css'; 
-import facultyimg from '../../../assets/KumudMaam.png';
+import staffimg from '../../../assets/PrincipalSir.png';
 
 const Home = () => {
   return (
     <div className="container">
       <div className="header">
         <img 
-          src= {facultyimg} 
+          src= {staffimg} 
           alt="profile" 
           className="profile-img" 
         />
-        <h1 className='Namebar'><strong>Welcome, Kumud Wasnik!</strong></h1>
+        <h1 className='Namebar'><strong>Welcome, Yogesh Nerkar!</strong></h1>
       </div>
 
       <div className="details-container">
