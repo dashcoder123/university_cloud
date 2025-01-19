@@ -24,7 +24,7 @@ const Home = () => {
           <p><strong>Head of Department:</strong> Prof. Kumud Wasnik</p>
           <p><strong>Class Advisor:</strong> Prof. Sumedh Pundkar</p>
           <p><strong>Class Representative:</strong> Avantika Mane</p>
-          <p><strong>Student Representative:</strong> Ruchi Bhati</p>
+          <p><strong>Student Representative:</strong> Ruchi Bhati</p> 
           <p><strong>Average CGPA:</strong> 8.936</p>
           <p><strong>Average Percentage:</strong> 80.08%</p>
         </div>
