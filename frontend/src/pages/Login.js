@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';  
+import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import umitheader from '../assets/umitheader.png';
@@ -32,10 +32,10 @@ const styles = {
     marginRight: '1rem'
   },
   formLabel: {
-    color: '#333', 
+    color: '#333',
   },
   formInput: {
-    color: '#333', 
+    color: '#333',
   },
   loginButton: {
     backgroundColor: '#295F98',
@@ -45,7 +45,7 @@ const styles = {
 };
 
 function Login() {
-  const [email, setEmail] = useState('');
+  const [id, setId] = useState('');
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -59,12 +59,12 @@ function Login() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (!email || !password || !role) {
+    if (!id || !password || !role) {
       alert("Please fill out all fields!");
       return;
     }
 
-    const userData = { email, password, role };
+    const userData = { id, password, role };
 
     try {
       const response = await fetch('http://localhost:8081/login', {
@@ -118,10 +118,20 @@ function Login() {
                 ))}
               </div>
 
-              {/* Email input */}
+              {/* ID input */}
               <div className="mb-4">
-                <label htmlFor="email" className="form-label">Email address</label>
-                <input type="email" className="form-control form-control-lg" id="email" placeholder="Enter your email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                <label htmlFor="id" className="form-label">
+                  {role === 'Student' ? 'Enter your PRN number' : 'Enter your Employee ID'}
+                </label>
+                <input
+                  type="text"
+                  className="form-control form-control-lg"
+                  id="id"
+                  placeholder={role === 'Student' ? 'PRN Number' : 'Employee ID'}
+                  value={id}
+                  onChange={(e) => setId(e.target.value)}
+                  required
+                />
               </div>
 
               {/* Password input */}
