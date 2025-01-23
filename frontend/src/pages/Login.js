@@ -6,6 +6,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import umitheader from '../assets/umitheader.png';
 import umitimg from '../assets/umit.png';
 
+
 const styles = {
   container: {
     height: '100vh',
