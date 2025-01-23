@@ -2,16 +2,22 @@ import React from 'react';
 import './Home.css'; 
 import studentimg from '../../../assets/Sheetal.jpg';
 
-const Home = () => {
+const Home = ({ id, role }) => {
+  console.log("ID in Home:", id);  // Log the received ID to the console
+  console.log("Role in Home:", role);  // Log the received role to the console
+
   return (
     <div className="container">
       <div className="header">
         <img 
-          src= {studentimg} 
+          src={studentimg} 
           alt="profile" 
           className="profile-img" 
         />
-        <h1 className='Namebar'><strong>Welcome, Sheetal Dash!</strong></h1>
+        {/* Dynamically display the name and role */}
+        <h1 className='Namebar'>
+          <strong>Welcome, {role === 'Student' ? id : 'Student'}!</strong>
+        </h1>
       </div>
 
       <div className="details-container">

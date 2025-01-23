@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';  // Import useAuth hook
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import umitheader from '../assets/umitheader.png';
@@ -50,6 +51,7 @@ function Login() {
   const [role, setRole] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   
+  const { setAuthData } = useAuth();  // Get setAuthData function from AuthContext
   const navigate = useNavigate();  // Hook for navigation
 
   const handleRadioChange = (event) => {
@@ -78,6 +80,9 @@ function Login() {
       const result = await response.json();
 
       if (response.ok && result.success) {
+        // Set id and role in AuthContext
+        setAuthData(id, role);
+
         // Navigate to the respective dashboard based on the role
         if (role === 'Student') {
           navigate('/student/dashboard');

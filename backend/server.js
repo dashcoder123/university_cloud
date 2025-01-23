@@ -38,7 +38,7 @@ app.post('/login', async (req, res) => {
   console.log('Received login attempt with id:', id, 'password:', password, 'role:', role);
 
   try {
-    const userDoc = await User.findOne();  // Doc containing the array of users
+    const userDoc = await User.findOne();  // Fetch the document containing the array of users
 
     if (userDoc) {
       console.log('ID:', id, 'Password:', password, 'Role:', role);
