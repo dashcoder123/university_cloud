@@ -76,6 +76,24 @@ const studentSchema = new mongoose.Schema({
 
 const Student = mongoose.model('Student', studentSchema);
 
+// Event Schema
+const eventSchema = new mongoose.Schema({
+  title: { type: String, required: true },
+  description: { type: String, required: true },
+  date: { type: Date, required: true },
+  location: { type: String, required: true }
+});
+
+const Event = mongoose.model('Event', eventSchema);
+
+// Notification Schema
+const notificationSchema = new mongoose.Schema({
+  text: { type: String, required: true },
+  link: { type: String, required: true },
+});
+
+const Notification = mongoose.model('Notification', notificationSchema);
+
 // Handle login requests
 app.post('/login', async (req, res) => {
   const { id, password, role } = req.body;
@@ -120,6 +138,28 @@ app.get('/api/students/:id', async (req, res) => {
     res.json(student);
   } catch (error) {
     console.error('Error fetching student data:', error);
+    res.status(500).json({ success: false, message: 'Server error' });
+  }
+});
+
+// API endpoint to get all events
+app.get('/api/events', async (req, res) => {
+  try {
+    const events = await Event.find(); // Fetch all events
+    res.json(events);
+  } catch (error) {
+    console.error('Error fetching events:', error);
+    res.status(500).json({ success: false, message: 'Server error' });
+  }
+});
+
+// API endpoint to get all notifications
+app.get('/api/notifications', async (req, res) => {
+  try {
+    const notifications = await Notification.find();
+    res.json(notifications);
+  } catch (error) {
+    console.error('Error fetching notifications:', error);
     res.status(500).json({ success: false, message: 'Server error' });
   }
 });
