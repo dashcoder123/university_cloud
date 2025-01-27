@@ -28,7 +28,6 @@ const Home = ({ id, role }) => {
   return (
     <div className="container">
       <div className="header">
-        {/* Dynamically display the name and role */}
         <h1 className='Namebar'>
           <strong>Welcome, {role === 'Student' ? studentData.name : 'Student'}!</strong>
         </h1>
@@ -47,7 +46,6 @@ const Home = ({ id, role }) => {
           <p><strong>Student Representative:</strong> {studentData.studentRep}</p>  
           <p><strong>Average CGPA:</strong> {studentData.cgpa || 'N/A'}</p>
           <p><strong>Average Percentage:</strong> {studentData.percentage || 'N/A'}</p>
-          {/* Add other academic details as necessary */}
         </div>
 
         <div className="details-box">
@@ -61,7 +59,6 @@ const Home = ({ id, role }) => {
           <p><strong>PRN Number:</strong> {studentData.prn}</p>
           <p><strong>ABC ID:</strong> {studentData.abcId}</p>
           <p><strong></strong> </p>
-          {/* Add other personal details as necessary */}
         </div>
       </div>
     </div>

@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './Home.css';
-import { useAuth } from '../../../context/AuthContext';  // Correct import path for useAuth hook
+import { useAuth } from '../../../context/AuthContext';  
 
 const Home = () => {
-  const { auth } = useAuth();  // Get auth data from context
+  const { auth } = useAuth();  
   const [facultyData, setFacultyData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const { id, role } = auth;  // Destructure id and role from auth
+  const { id, role } = auth; 
 
   useEffect(() => {
     if (!id) {

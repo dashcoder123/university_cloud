@@ -8,7 +8,7 @@ app.use(cors());
 app.use(express.json());  
 
 // MongoDB Atlas connection string
-const dbURI = "mongodb+srv://sheetaldash52:sheetaluni123@cluster0.i2mcn.mongodb.net/y";
+const dbURI = "mongodb+srv://sheetaldash52:sheetaluni123@cluster0.i2mcn.mongodb.net/portal";
 
 // Connect to MongoDB Atlas
 mongoose
@@ -70,9 +70,7 @@ const studentSchema = new mongoose.Schema({
   l3att: { type: String, required: true },
   l4att: { type: String, required: true },
   l5att: { type: String, required: true }
-  // Add other fields as necessary
 });
-
 
 const Student = mongoose.model('Student', studentSchema);
 
@@ -119,6 +117,25 @@ const facultySchema = new mongoose.Schema({
 
 const Faculty = mongoose.model('Faculty', facultySchema);
 
+// Activity Schema
+const activitySchema = new mongoose.Schema({
+  facultyId: { type: String, required: true, unique: true },
+  roles: [
+    {
+      roleName: { type: String, required: true },
+      activities: [
+        {
+          name: { type: String, required: true },
+          url: { type: String, required: true },
+        },
+      ],
+    },
+  ],
+});
+
+const Activity = mongoose.model('Activity', activitySchema);
+
+
 // Handle login requests
 app.post('/login', async (req, res) => {
   const { id, password, role } = req.body;
@@ -126,7 +143,7 @@ app.post('/login', async (req, res) => {
   console.log('Received login attempt with id:', id, 'password:', password, 'role:', role);
 
   try {
-    const userDoc = await User.findOne();  // Fetch the document containing the array of users
+    const userDoc = await User.findOne();  
 
     if (userDoc) {
       console.log('ID:', id, 'Password:', password, 'Role:', role);
@@ -197,6 +214,25 @@ app.get('/api/faculty/:id', async (req, res) => {
     res.json(faculty);
   } catch (error) {
     console.error('Error fetching faculty data:', error);
+    res.status(500).json({ success: false, message: 'Server error' });
+  }
+});
+
+// Endpoint to fetch activity by faculty ID
+app.get('/api/activities/:id', async (req, res) => {
+  try {
+    const activity = await Activity.findOne({ facultyId: req.params.id });
+
+    if (!activity) {
+      return res.status(404).json({ success: false, message: 'Activity not found for this faculty' });
+    }
+
+    res.json({
+      success: true,
+      roles: activity.roles,  // Return the list of roles and their activities
+    });
+  } catch (error) {
+    console.error('Error fetching activity data:', error);
     res.status(500).json({ success: false, message: 'Server error' });
   }
 });

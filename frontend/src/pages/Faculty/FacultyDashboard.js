@@ -8,10 +8,10 @@ import Notifications from './subpages/Notifications';
 import Activity from './subpages/Activity.js';
 import FacultyRecord from './subpages/EmploymentRecord.js';
 import TeachingMaterial from './subpages/TeachingMaterial.js';
-import { useAuth } from '../../context/AuthContext.js';  // Import useAuth hook
+import { useAuth } from '../../context/AuthContext.js';  
 
 const FacultyDashboard = () => {
-  const { auth } = useAuth();  // Get the id and role from AuthContext
+  const { auth } = useAuth();  
   const { id, role } = auth;
 
   console.log("ID in FacultyDashboard:", id);

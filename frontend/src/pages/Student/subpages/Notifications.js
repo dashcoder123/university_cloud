@@ -11,7 +11,7 @@ const Notifications = () => {
     fetch('http://localhost:8081/api/notifications')
       .then((response) => response.json())
       .then((data) => {
-        setNotifications(data); // Set the fetched data into state
+        setNotifications(data); 
       })
       .catch((error) => {
         console.error('Error fetching notifications:', error);

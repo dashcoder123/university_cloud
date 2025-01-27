@@ -9,16 +9,16 @@ const Events = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await fetch('http://localhost:8081/api/events'); // Adjust the URL if needed
+        const response = await fetch('http://localhost:8081/api/events'); 
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
-        setEvents(data); // Store events in state
+        setEvents(data); 
       } catch (error) {
         console.error('Error fetching events:', error);
       } finally {
-        setLoading(false); // Set loading to false after fetching is complete
+        setLoading(false); 
       }
     };
 
