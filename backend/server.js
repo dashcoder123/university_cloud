@@ -1,6 +1,8 @@
 const express = require('express'); 
 const cors = require('cors'); 
 const mongoose = require('mongoose'); 
+const bcrypt = require('bcryptjs');
+
 
 const app = express(); 
 
@@ -72,7 +74,9 @@ const studentSchema = new mongoose.Schema({
   l5att: { type: String, required: true }
 });
 
+
 const Student = mongoose.model('Student', studentSchema);
+
 
 // Event Schema
 const eventSchema = new mongoose.Schema({
@@ -84,6 +88,7 @@ const eventSchema = new mongoose.Schema({
 
 const Event = mongoose.model('Event', eventSchema);
 
+
 // Notification Schema
 const notificationSchema = new mongoose.Schema({
   text: { type: String, required: true },
@@ -91,6 +96,7 @@ const notificationSchema = new mongoose.Schema({
 });
 
 const Notification = mongoose.model('Notification', notificationSchema);
+
 
 // Faculty Schema
 const facultySchema = new mongoose.Schema({
@@ -117,18 +123,14 @@ const facultySchema = new mongoose.Schema({
 
 const Faculty = mongoose.model('Faculty', facultySchema);
 
+
 // Activity Schema
 const activitySchema = new mongoose.Schema({
   facultyId: { type: String, required: true, unique: true },
-  roles: [
+  activities: [
     {
-      roleName: { type: String, required: true },
-      activities: [
-        {
-          name: { type: String, required: true },
-          url: { type: String, required: true },
-        },
-      ],
+      name: { type: String, required: true },
+      url: { type: String, required: true },
     },
   ],
 });
@@ -136,41 +138,52 @@ const activitySchema = new mongoose.Schema({
 const Activity = mongoose.model('Activity', activitySchema);
 
 
+
 // Handle login requests
 app.post('/login', async (req, res) => {
   const { id, password, role } = req.body;
 
-  console.log('Received login attempt with id:', id, 'password:', password, 'role:', role);
+  console.log('Received login attempt with id:', id, 'role:', role);
 
   try {
-    const userDoc = await User.findOne();  
+    const userDoc = await User.findOne();
 
-    if (userDoc) {
-      console.log('ID:', id, 'Password:', password, 'Role:', role);
-      console.log('All users in the database:', userDoc.users); // Log the users array
+    if (!userDoc) {
+      return res.status(404).json({ success: false, message: 'No users found in the database' });
+    }
 
-      // Search for the user within the "users" array, matching id, password, and role
-      const user = userDoc.users.find(user => 
-        user.id === id &&  
-        user.password === password && 
-        user.role === role
-      );
-      
-      console.log('Found user:', user);
+    console.log('All users in the database:', userDoc.users);
 
-      if (user) {
-        res.json({ success: true, message: 'Login successful' });
-      } else {
-        res.status(401).json({ success: false, message: 'Invalid credentials or role' });
-      }
+    // Find the user with matching id and role
+    const user = userDoc.users.find(user => user.id === id && user.role === role);
+
+    if (!user) {
+      return res.status(401).json({ success: false, message: 'User not found or invalid role' });
+    }
+
+    console.log('User found:', user);
+
+    if (!user.password.startsWith('$2a$')) {
+      console.error('Password is not hashed. Please ensure passwords are hashed in the database.');
+      return res.status(500).json({ success: false, message: 'Server error: Password not hashed' });
+    }
+
+    // Compare the plain-text password with the hashed password
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if (isMatch) {
+      console.log('Password match successful for user:', id);
+      res.json({ success: true, message: 'Login successful' });
     } else {
-      res.status(404).json({ success: false, message: 'User  not found in the database' });
+      console.log('Invalid password for user:', id);
+      res.status(401).json({ success: false, message: 'Invalid credentials' });
     }
   } catch (err) {
     console.error('Error during login:', err);
     res.status(500).json({ success: false, message: 'Server error' });
   }
 });
+
 
 // API endpoint to get student data by ID
 app.get('/api/students/:id', async (req, res) => {
@@ -229,13 +242,15 @@ app.get('/api/activities/:id', async (req, res) => {
 
     res.json({
       success: true,
-      roles: activity.roles,  // Return the list of roles and their activities
+      activities: activity.activities,  
     });
   } catch (error) {
     console.error('Error fetching activity data:', error);
     res.status(500).json({ success: false, message: 'Server error' });
   }
 });
+
+
 
 // Start the server
 app.listen(8081, () => {
