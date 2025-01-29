@@ -81,7 +81,7 @@ function Login() {
       const result = await response.json();
 
       if (response.ok && result.success) {
-      
+        // Set id and role in AuthContext (globalling)
         setAuthData(id, role);
 
         // Navigate to the respective dashboard based on the role

@@ -1,44 +1,69 @@
-import React from 'react';
-import './Home.css'; 
-import staffimg from '../../../assets/PrincipalSir.png';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import './Home.css';
+import { useAuth } from '../../../context/AuthContext';
 
 const Home = () => {
+  const { auth } = useAuth();
+  const [staffData, setStaffData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const { id } = auth;
+
+  useEffect(() => {
+    if (!id) {
+      setError('Staff ID is not provided');
+      setLoading(false);
+      return;
+    }
+
+    const fetchStaffData = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8081/api/staff/${id}`);  // Replace with the correct API endpoint
+        setStaffData(response.data);
+      } catch (err) {
+        setError('Error fetching staff data');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchStaffData();
+  }, [id]);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>{error}</div>;
+
   return (
     <div className="container">
       <div className="header">
-        <img 
-          src= {staffimg} 
-          alt="profile" 
-          className="profile-img" 
-        />
-        <h1 className='Namebar'><strong>Welcome, Yogesh Nerkar!</strong></h1>
+        <h1 className="Namebar">
+          <strong>Welcome, {staffData?.name || 'Staff'}!</strong>
+        </h1>
       </div>
 
       <div className="details-container">
         <div className="details-box">
           <h2>Academic Details:</h2>
-          <p><strong>Course Enrolled:</strong> Computer Science and Technology</p>
-          <p><strong>Year of Admission:</strong> 2021</p>
-          <p><strong>Year of Graduation:</strong> 2025</p>
-          <p><strong>Academic Year:</strong> Fourth Year</p>
-          <p><strong>Head of Department:</strong> Prof. Kumud Wasnik</p>
-          <p><strong>Class Advisor:</strong> Prof. Sumedh Pundkar</p>
-          <p><strong>Class Representative:</strong> Avantika Mane</p>
-          <p><strong>Student Representative:</strong> Ruchi Bhati</p> 
-          <p><strong>Average CGPA:</strong> 8.936</p>
-          <p><strong>Average Percentage:</strong> 80.08%</p>
+          <p><strong>Department:</strong> {staffData?.department || 'N/A'}</p>
+          <p><strong>Year of Joining:</strong> {staffData?.yearOfJoining || 'N/A'}</p>
+          <p><strong>Highest Education Qualification:</strong> {staffData?.highestEducationQualification || 'N/A'}</p>
+          <p><strong>Work Type:</strong> {staffData?.workType || 'N/A'}</p>
+          <p><strong>Position:</strong> {staffData?.position || 'N/A'}</p>
+          <p><strong>Total Work Years:</strong> {staffData?.totalWorkYears || 'N/A'}</p>
         </div>
 
         <div className="details-box">
           <h2>Personal Details:</h2>
-          <p><strong>Father's Name:</strong> Soubhagya Kumar Dash</p>
-          <p><strong>Mother's Name:</strong> Jyotirmayee Dash</p>
-          <p><strong>Phone Number:</strong> 9136371156</p>
-          <p><strong>Alternate Phone Number:</strong> 9136371156</p>
-          <p><strong>Email ID:</strong> sheetaldash52@gmail.com</p>
-          <p><strong>Category:</strong> General</p>
-          <p><strong>PRN Number:</strong> 2021016100164133</p>
-          <p><strong>ABC ID:</strong> 120-330-393-051</p>
+          <p><strong>Father's Name:</strong> {staffData?.fathersName || 'N/A'}</p>
+          <p><strong>Mother's Name:</strong> {staffData?.mothersName || 'N/A'}</p>
+          <p><strong>Phone Number:</strong> {staffData?.phoneNumber || 'N/A'}</p>
+          <p><strong>Alternate Phone Number:</strong> {staffData?.alternatePhone || 'N/A'}</p>
+          <p><strong>Residential Address:</strong> {staffData?.residentialAddress || 'N/A'}</p>
+          <p><strong>Email ID:</strong> {staffData?.email || 'N/A'}</p>
+          <p><strong>Date of Birth:</strong> {staffData?.dateOfBirth ? new Date(staffData?.dateOfBirth).toLocaleDateString() : 'N/A'}</p>
+          <p><strong>Nationality:</strong> {staffData?.nationality || 'N/A'}</p>
         </div>
       </div>
     </div>

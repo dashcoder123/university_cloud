@@ -127,15 +127,62 @@ const Faculty = mongoose.model('Faculty', facultySchema);
 // Activity Schema
 const activitySchema = new mongoose.Schema({
   facultyId: { type: String, required: true, unique: true },
-  activities: [
+  roles: [
     {
-      name: { type: String, required: true },
-      url: { type: String, required: true },
+      roleName: { type: String, required: true },
+      activities: [
+        {
+          name: { type: String, required: true },
+          url: { type: String, required: true },
+        },
+      ],
     },
   ],
 });
 
 const Activity = mongoose.model('Activity', activitySchema);
+
+//TeachingInfo Schema
+
+const teachingInfoSchema = new mongoose.Schema({
+  id: { type: String, required: true, unique: true },
+  teachingInfo: [String], 
+  teachingTT: { type: String },  
+  yearlyCalendar: { type: String },  
+  teachingSyllabus: [
+    {
+      branch: { type: String, required: true },
+      syll: { type: String, required: true },
+    },
+  ],
+});
+
+const TeachingInfo = mongoose.model('TeachingInfo', teachingInfoSchema);
+
+
+// Staff Schema
+const staffSchema = new mongoose.Schema({
+  id: { type: String, required: true, unique: true },
+  name: { type: String, required: true },
+  yearOfJoining: { type: Number, required: true },
+  highestEducationQualification: { type: String, required: true },
+  department: { type: String, required: true },
+  role: { type: String, required: true },
+  workType: { type: String, required: true },
+  position: { type: String, required: true },
+  totalWorkYears: { type: Number, required: true },
+  fathersName: { type: String, required: true },
+  mothersName: { type: String, required: true },
+  phoneNumber: { type: String, required: true },
+  alternatePhone: { type: String, required: true },
+  residentialAddress: { type: String, required: true },
+  email: { type: String, required: true },
+  dateOfBirth: { type: Date, required: true },
+  nationality: { type: String, required: true },
+  password: { type: String, required: true }
+});
+
+const Staff = mongoose.model('Staff', staffSchema);
 
 
 
@@ -231,25 +278,53 @@ app.get('/api/faculty/:id', async (req, res) => {
   }
 });
 
-// Endpoint to fetch activity by faculty ID
+// Endpoint to fetch activities by faculty ID
 app.get('/api/activities/:id', async (req, res) => {
   try {
     const activity = await Activity.findOne({ facultyId: req.params.id });
 
     if (!activity) {
-      return res.status(404).json({ success: false, message: 'Activity not found for this faculty' });
+      return res.status(404).json({ success: false, message: 'Activities not found for this faculty' });
     }
 
+    // Return the faculty ID and associated roles with their activities
     res.json({
       success: true,
-      activities: activity.activities,  
+      facultyId: activity.facultyId,
+      roles: activity.roles, // Return the roles and activities for the faculty
     });
   } catch (error) {
     console.error('Error fetching activity data:', error);
     res.status(500).json({ success: false, message: 'Server error' });
   }
 });
+// Endpoint to fetch teaching info by faculty ID
+app.get('/api/teachinginfo/:id', async (req, res) => {
+  try {
+    const teachingInfo = await TeachingInfo.findOne({ id: req.params.id });
 
+    if (!teachingInfo) {
+      return res.status(404).json({ success: false, message: 'Teaching information not found' });
+    }
+
+    res.json(teachingInfo);
+  } catch (error) {
+    console.error('Error fetching teaching info:', error);
+    res.status(500).json({ success: false, message: 'Server error' });
+  }
+});
+
+// Endpoint to get staff data by ID
+app.get('/api/staff/:id', async (req, res) => {
+  try {
+    const staff = await Staff.findOne({ id: req.params.id });
+    if (!staff) return res.status(404).json({ success: false, message: 'Staff not found' });
+    res.json(staff);
+  } catch (error) {
+    console.error('Error fetching staff data:', error);
+    res.status(500).json({ success: false, message: 'Server error' });
+  }
+});
 
 
 // Start the server
