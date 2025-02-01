@@ -154,7 +154,6 @@ function Login() {
                 </div>
               )}
 
-              <p className="small mb-5 text-center"><a href="#!" className="text-muted">Forgot password?</a></p>
             </form>
             {/* Form ends here */}
           </div>
