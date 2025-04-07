@@ -1,0 +1,108 @@
+.navbar {
+  background-color: #295F98;
+  height: 60px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.menu-bars {
+  margin-left: 2rem;
+  font-size: 1.6rem;
+  background: none;
+}
+
+.nav-menu {
+  background-color: #295F98;
+  width: 250px;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: -100%;
+  transition: 850ms;
+}
+
+.nav-menu.active {
+  left: 0;
+  transition: 350ms;
+}
+
+.nav-text {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding: 8px 0px 8px 10px;
+  list-style: none;
+  height: 70px;
+}
+
+.nav-text a {
+  text-decoration: none;
+  color: #f5f5f5;
+  font-size: 17px;
+  width: 95%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 -1px 0 2px;
+  border-radius: 4px;
+}
+
+
+.nav-menu-items {
+  width: 100%;
+}
+
+.navbar-toggle {
+  background-color: #295F98;
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
+span {
+  margin-left: 16px;
+}
+
+.umit-img {
+  margin-left: auto;
+  max-width: 20%;
+  height: auto;
+  object-fit: contain;
+}
+
+@media (max-width: 480px) {
+  .umit-img {
+    max-width: 10%;
+  }
+}
+
+@media (max-width: 700px) {
+  .umit-img {
+    max-width: 50%;
+  }
+}
+
+/* Dark Mode Styles */
+body.dark {
+  background-color: #1b1b1b;
+  color: rgb(0, 0, 0);
+}
+
+body.dark .navbar {
+  background-color: #333333;
+}
+
+body.dark .nav-menu,
+body.dark .navbar-toggle {
+  background-color: #333333;
+}
+
+body.dark .nav-text a {
+  color: #ffffff;
+}

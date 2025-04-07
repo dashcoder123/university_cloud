@@ -1,0 +1,96 @@
+.container {
+    padding: 30px;
+    max-width: 1200px; /* Optional: Set a max-width for better centering */
+    margin: 0 auto; /* Centers the container */
+}
+
+body {
+    background-color: #f4f4f4;
+}
+
+.header {
+    display: flex;
+    justify-content: center; /* Center-aligns the content horizontally */
+    align-items: center;
+    background-color: #0A2647;
+    padding: 20px;
+    border-radius: 20px;
+    margin-bottom: 30px;
+}
+
+.Activitybar {
+    font-size: 35px;
+    color: #E3F6FF;
+    text-align: center; /* Center-aligns the text within the header */
+}
+
+.info-box {
+    width: 100%;
+    padding: 20px;
+    border: 2px solid #295F98;
+    border-radius: 10px;
+    background-color: #f5f7fa;
+    margin-bottom: 20px;
+}
+.infotitle{
+    font-size: 25px;
+    text-align: center;
+}
+.info-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+
+.infos-box {
+    width: 30%;
+    padding: 10px;
+    border: 2px solid #295F98;
+    border-radius: 10px;
+    background-color: #f5f7fa;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    display: flex;
+  }
+
+  button {
+    background-color: #0A2647;
+    color: #E3F6FF;
+    font-size: 10px;
+    margin-left: 10PX;
+    padding: 5px 15px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  button svg {
+    margin-right: 1px;
+    font-size: 18px;
+  }
+  
+  button:hover {
+    background-color: #1E4A6A;
+    transform: translateY(-2px);
+  }
+  
+  button:active {
+    transform: translateY(0);
+  }
+
+  /* Responsive Design */
+@media (max-width: 500px) {
+    button {
+        font-size: 20px;
+        margin-left: 5px;
+        padding: 2px 10px;
+    }
+    .infos-box {
+        padding: 10px;
+        font-size: 12px;
+        display: block;
+    }
+}
