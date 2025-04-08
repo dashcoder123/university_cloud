@@ -7,6 +7,7 @@ import Events from './subpages/Events';
 import Notifications from './subpages/Notifications';
 import Payment from './subpages/Payment';
 import Results from './subpages/Results';
+import TicketCategories from './subpages/Ticket.js';
 import { useAuth } from '../../context/AuthContext.js';  // Import useAuth hook
 import Chatbot from './Chatbot'; // ✅ Importing Chatbot component
 
@@ -28,6 +29,7 @@ const StudentDashboard = () => {
           <Route path="notifications" element={<Notifications id={id} role={role} />} />
           <Route path="payment" element={<Payment id={id} role={role} />} />
           <Route path="results" element={<Results id={id} role={role} />} />
+          <Route path="ticket" element={<TicketCategories id={id} role={role} />} />
         </Routes>
       </div>
 

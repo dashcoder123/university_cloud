@@ -39,6 +39,12 @@ export const SidebarData = [
     cName: 'nav-text'
   },
   {
+    title: 'Raise a Ticket',
+    path: '/student/dashboard/ticket',
+    icon: <FaIcons.FaTicketAlt />,
+    cName: 'nav-text'
+  },
+  {
     title: 'Sign Out',
     path: '/login',
     icon: <FaIcons.FaSignOutAlt />,
