@@ -41,17 +41,17 @@ const EmploymentRecord = () => {
 
       {!isLoggedIn ? (
         <form className="login-card" onSubmit={handleLogin}>
-          <h2 className="login-title">Keystone Login</h2>
+          <h2 className="login-title">Department Login</h2>
           <input
             type="text"
-            placeholder="Keystone Username"
+            placeholder="Department Username"
             value={id}
             onChange={(e) => setId(e.target.value)}
             required
           />
           <input
             type="password"
-            placeholder="Keystone Password"
+            placeholder="Department Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
