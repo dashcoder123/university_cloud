@@ -98,6 +98,7 @@ const notificationSchema = new mongoose.Schema({
 const Notification = mongoose.model('Notification', notificationSchema);
 
 
+
 // Faculty Schema
 const facultySchema = new mongoose.Schema({
   id: { type: String, required: true, unique: true },
@@ -141,6 +142,19 @@ const activitySchema = new mongoose.Schema({
 });
 
 const Activity = mongoose.model('Activity', activitySchema);
+
+
+// Announcement Schema
+const announcementSchema = new mongoose.Schema({
+  year: { type: String, required: true },
+  branch: { type: String, required: true },
+  title: { type: String, required: true },
+  description: { type: String, required: true },
+});
+
+const Announcement = mongoose.model('Announcement', announcementSchema);
+
+
 
 //TeachingInfo Schema
 
@@ -230,6 +244,42 @@ app.post('/login', async (req, res) => {
     res.status(500).json({ success: false, message: 'Server error' });
   }
 });
+
+// Faculty creates an announcement
+app.post('/api/announcements', async (req, res) => {
+  const { year, branch, title, description, postedBy } = req.body;
+
+  if (!year || !branch || !title || !description) {
+    return res.status(400).json({ success: false, message: 'All fields are required' });
+  }
+
+  try {
+    const newAnnouncement = new Announcement({ year, branch, title, description, postedBy });
+    await newAnnouncement.save();
+    res.status(201).json({ success: true, message: 'Announcement posted successfully' });
+  } catch (error) {
+    console.error('Error posting announcement:', error);
+    res.status(500).json({ success: false, message: 'Server error' });
+  }
+});
+
+// Students fetch announcements
+app.get('/api/announcements', async (req, res) => {
+  const { year, branch } = req.query;
+
+  if (!year || !branch) {
+    return res.status(400).json({ success: false, message: 'Year and branch are required' });
+  }
+
+  try {
+    const announcements = await Announcement.find({ year, branch }).sort({ postedAt: -1 });
+    res.json({ success: true, announcements });
+  } catch (error) {
+    console.error('Error fetching announcements:', error);
+    res.status(500).json({ success: false, message: 'Server error' });
+  }
+});
+
 
 
 // API endpoint to get student data by ID

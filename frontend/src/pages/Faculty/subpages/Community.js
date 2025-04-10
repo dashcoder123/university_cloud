@@ -3,7 +3,7 @@ import './Community.css';
 
 const FacultyCommunity = () => {
     const [title, setTitle] = useState('');
-    const [content, setContent] = useState('');
+    const [description, setDescription] = useState('');
     const [selectedYear, setSelectedYear] = useState('');
     const [selectedBranch, setSelectedBranch] = useState('');
     const [status, setStatus] = useState('');
@@ -14,15 +14,13 @@ const FacultyCommunity = () => {
 
         const postData = {
             title,
-            content,
+            description,
             year: selectedYear,
             branch: selectedBranch,
-            postedBy: 'Dr. Sharma', // Replace with actual logged-in faculty name
-            date: new Date().toISOString(),
         };
 
         try {
-            const response = await fetch('http://localhost:8081/api/community-post', {
+            const response = await fetch('http://localhost:8081/api/announcements', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -31,37 +29,46 @@ const FacultyCommunity = () => {
             });
 
             if (response.ok) {
-                setStatus('✅ Posted successfully!');
+                setStatus(`Posted successfully! "${title}" - ${description}`);
                 setTitle('');
-                setContent('');
+                setDescription('');
                 setSelectedYear('');
                 setSelectedBranch('');
             } else {
-                setStatus('❌ Failed to post.');
+                setStatus('Failed to post.');
             }
         } catch (error) {
             console.error('Error posting:', error);
-            setStatus('❌ Error posting message.');
+            setStatus('Error posting message.');
         }
     };
 
     const getBranchOptions = () => {
-        return selectedYear === '4th'
-            ? ['CST', 'IT', 'DS', 'CE']
-            : ['CST', 'IT', 'DS', 'CE', 'AI'];
+        const allBranches = [
+            'Computer Science and Technology',
+            'Information Technology',
+            'Data Science',
+            'Computer Engineering',
+            'Artificial Intelligence',
+            'Electronics and Communication'
+        ];
+
+        return selectedYear === 'Fourth Year'
+            ? allBranches.slice(0, 4) // CST, IT, DS, CE
+            : allBranches;            // all branches
     };
 
     return (
         <div className="faculty-chat-container">
-            <h2 className="chat-header">📤 Post to Community</h2>
+            <h2 className="chat-header"> Post to Class</h2>
             <form onSubmit={handleSubmit} className="faculty-form">
 
                 <select required value={selectedYear} onChange={(e) => setSelectedYear(e.target.value)}>
                     <option value="">Select Year</option>
-                    <option value="1st">1st Year</option>
-                    <option value="2nd">2nd Year</option>
-                    <option value="3rd">3rd Year</option>
-                    <option value="4th">4th Year</option>
+                    <option value="First Year">First Year</option>
+                    <option value="Second Year">Second Year</option>
+                    <option value="Third Year">Third Year</option>
+                    <option value="Fourth Year">Fourth Year</option>
                 </select>
 
                 <select required value={selectedBranch} onChange={(e) => setSelectedBranch(e.target.value)}>
@@ -70,6 +77,7 @@ const FacultyCommunity = () => {
                         <option key={branch} value={branch}>{branch}</option>
                     ))}
                 </select>
+
                 <input
                     type="text"
                     placeholder="Title"
@@ -77,11 +85,12 @@ const FacultyCommunity = () => {
                     required
                     onChange={(e) => setTitle(e.target.value)}
                 />
+
                 <textarea
                     placeholder="Write your message here..."
-                    value={content}
+                    value={description}
                     required
-                    onChange={(e) => setContent(e.target.value)}
+                    onChange={(e) => setDescription(e.target.value)}
                 ></textarea>
 
                 <div className="button-wrapper">
@@ -95,4 +104,3 @@ const FacultyCommunity = () => {
 };
 
 export default FacultyCommunity;
-

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './Home.css'; 
 
-const Home = ({ id, role }) => {
+const Home = ({ id, role, onYearBranchExtracted }) => {
   const [studentData, setStudentData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -12,7 +12,21 @@ const Home = ({ id, role }) => {
       try {
         const response = await axios.get(`http://localhost:8081/api/students/${id}`);
         setStudentData(response.data);
+
+        const extractedYear = response.data.academicYear;
+        const extractedBranch = response.data.course;
+
+        console.log("📤 Extracted from Home - Year:", extractedYear, "Branch:", extractedBranch);
+
+        // 🔥 Send year and branch to parent
+        if (onYearBranchExtracted) {
+          onYearBranchExtracted({
+            year: extractedYear,
+            branch: extractedBranch
+          });
+        }
       } catch (err) {
+        console.error("❌ Error fetching student data:", err);
         setError('Error fetching student data');
       } finally {
         setLoading(false);
@@ -20,7 +34,7 @@ const Home = ({ id, role }) => {
     };
 
     fetchStudentData();
-  }, [id]);
+  }, [id, onYearBranchExtracted]);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
@@ -58,7 +72,6 @@ const Home = ({ id, role }) => {
           <p><strong>Category:</strong> {studentData.category}</p>
           <p><strong>PRN Number:</strong> {studentData.prn}</p>
           <p><strong>ABC ID:</strong> {studentData.abcId}</p>
-          <p><strong></strong> </p>
         </div>
       </div>
     </div>
@@ -66,6 +79,3 @@ const Home = ({ id, role }) => {
 };
 
 export default Home;
-
-
-
