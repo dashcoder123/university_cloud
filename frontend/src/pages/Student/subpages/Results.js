@@ -16,7 +16,8 @@ const Results = () => {
 
   const handleSubmit = () => {
     if (selectedSemester && selectedYear) {
-      const link = `https://99cf-103-178-105-213.ngrok-free.app/v1/AUTH_test/receipts/0012021.pdf`;
+      const fileName = `${selectedYear}_Semester ${selectedSemester}.pdf`;
+      const link = `https://99cf-103-178-105-213.ngrok-free.app/v1/AUTH_test/results/${fileName}`;
       setPdfLink(link);
     } else {
       alert("Please select both semester and year.");
@@ -79,6 +80,6 @@ const Results = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Results;
