@@ -5,6 +5,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import umitheader from '../assets/umitheader.png';
 import umitimg from '../assets/umit.png';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+
 
 const styles = {
   container: {
@@ -127,10 +129,15 @@ function Login() {
                   value={id}
                   onChange={(e) => setId(e.target.value)}
                   required
+                  style={{
+                    fontWeight: '500',
+                    width: '560px',
+                    height: '50px'
+                  }}
                 />
               </div>
 
-              {/* Password input with toggle */}
+              {/* Password input with eye icon toggle */}
               <div className="mb-4">
                 <label htmlFor="password" className="form-label">Password</label>
                 <div className="input-group input-group-lg">
@@ -142,15 +149,26 @@ function Login() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
+                    style={{
+                      fontWeight: '500',
+                      height: '50px'
+                    }}
                   />
-                  <button
-                    type="button"
+                  <span
                     className="input-group-text"
                     onClick={() => setShowPassword(!showPassword)}
-                    style={{ cursor: 'pointer' }}
+                    style={{
+                      cursor: 'pointer',
+                      background: 'white',
+                      height: '50px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      width: '50px'
+                    }}
                   >
-                    {showPassword ? 'Hide' : 'Show'}
-                  </button>
+                    <i className={`fa-solid ${showPassword ? 'fa-eye-slash' : 'fa-eye'}`} style={{ fontSize: '18px' }}></i>
+                  </span>
                 </div>
               </div>
 
