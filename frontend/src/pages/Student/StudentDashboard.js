@@ -10,6 +10,8 @@ import Results from './subpages/Results';
 import TicketCategories from './subpages/Ticket.js';
 import { useAuth } from '../../context/AuthContext.js';  // Import useAuth hook
 import Chatbot from './Chatbot'; // ✅ Importing Chatbot component
+import Community from './subpages/Community';
+
 
 const StudentDashboard = () => {
   const { auth } = useAuth();  // Get the id and role from AuthContext
@@ -30,6 +32,7 @@ const StudentDashboard = () => {
           <Route path="payment" element={<Payment id={id} role={role} />} />
           <Route path="results" element={<Results id={id} role={role} />} />
           <Route path="ticket" element={<TicketCategories id={id} role={role} />} />
+          <Route path="community" element={<Community />} />
         </Routes>
       </div>
 

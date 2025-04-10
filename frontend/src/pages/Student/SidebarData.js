@@ -27,6 +27,12 @@ export const SidebarData = [
     cName: 'nav-text'
   },
   {
+    title: 'Community',
+    path: '/student/dashboard/community',
+    icon: <FaIcons.FaUsers />,
+    cName: 'nav-text'
+  },
+  {
     title: 'Payment and Fees',
     path: '/student/dashboard/payment',
     icon: <FaIcons.FaReceipt />,

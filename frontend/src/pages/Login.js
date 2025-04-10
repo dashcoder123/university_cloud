@@ -32,12 +32,6 @@ const styles = {
   radioItem: {
     marginRight: '1rem'
   },
-  formLabel: {
-    color: '#333',
-  },
-  formInput: {
-    color: '#333',
-  },
   loginButton: {
     backgroundColor: '#295F98',
     borderColor: '#295F98',
@@ -50,7 +44,7 @@ function Login() {
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-  const [showPassword, setShowPassword] = useState(false); // Toggle password visibility
+  const [showPassword, setShowPassword] = useState(false);
 
   const { setAuthData } = useAuth();
   const navigate = useNavigate();
@@ -139,10 +133,10 @@ function Login() {
               {/* Password input with toggle */}
               <div className="mb-4">
                 <label htmlFor="password" className="form-label">Password</label>
-                <div className="input-group">
+                <div className="input-group input-group-lg">
                   <input
-                    type={showPassword ? "text" : "password"}
-                    className="form-control form-control-lg"
+                    type={showPassword ? 'text' : 'password'}
+                    className="form-control"
                     id="password"
                     placeholder="Enter your password"
                     value={password}
@@ -150,12 +144,12 @@ function Login() {
                     required
                   />
                   <button
-                    className="btn btn-outline-secondary"
                     type="button"
+                    className="input-group-text"
                     onClick={() => setShowPassword(!showPassword)}
-                    style={{ border: '1px solid #ced4da' }}
+                    style={{ cursor: 'pointer' }}
                   >
-                    {showPassword ? "Hide" : "Show"}
+                    {showPassword ? 'Hide' : 'Show'}
                   </button>
                 </div>
               </div>

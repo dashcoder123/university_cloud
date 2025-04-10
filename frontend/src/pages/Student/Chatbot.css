@@ -3,6 +3,10 @@
     bottom: 20px;
     right: 20px;
     z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    max-width: 100vw;
 }
 
 .chatbot-toggle {
@@ -17,7 +21,7 @@
 }
 
 .chatbot-box {
-    width: 300px;
+    width: 320px;
     background: white;
     border: 1px solid #ccc;
     border-radius: 12px;
@@ -25,44 +29,55 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    margin-top: 10px;
+    box-sizing: border-box;
 }
 
+/* Header with close button */
 .chatbot-header {
     background-color: #295f98;
     color: white;
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
+    padding: 10px 16px;
+    display: grid;
+    grid-template-columns: 1fr auto;
     align-items: center;
+    font-size: 16px;
+}
+
+.chatbot-header span {
+    font-weight: bold;
+}
+
+/* Small, square close button */
+.chatbot-header button {
+    background-color: #1e4a76;
+    color: white;
+    border: none;
+    font-size: 16px;
+    width: 26px;
+    height: 26px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    line-height: 1;
+    margin-left: auto;
+}
+
+.chatbot-header button:hover {
+    background-color: #163957;
 }
 
 .chatbot-body {
     flex: 1;
     padding: 10px;
-    max-height: 200px;
+    max-height: 240px;
     overflow-y: auto;
 }
 
-.chatbot-input {
-    display: flex;
-    border-top: 1px solid #ccc;
-}
-
-.chatbot-input input {
-    flex: 1;
-    padding: 10px;
-    border: none;
-    outline: none;
-}
-
-.chatbot-input button {
-    background-color: #295f98;
-    color: white;
-    border: none;
-    padding: 0 15px;
-    cursor: pointer;
-}
-
+/* Chat bubbles */
 .chat-message {
     margin-bottom: 10px;
 }
@@ -71,4 +86,35 @@
 .chat-answer {
     padding: 5px;
     border-radius: 5px;
+}
+
+/* Hide question bubble when it's empty (like for initial bot message) */
+.chat-question:empty {
+    display: none;
+}
+
+.option-button {
+    background-color: #fff;
+    border: 1px solid #295f98;
+    color: #295f98;
+    border-radius: 8px;
+    padding: 10px;
+    margin: 6px 0;
+    cursor: pointer;
+    font-size: 15px;
+    transition: background-color 0.2s, color 0.2s;
+    width: 100%;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.option-button:hover {
+    background-color: #295f98;
+    color: #fff;
+}
+
+
+/* Remove old input styling */
+.chatbot-input {
+    display: none;
 }

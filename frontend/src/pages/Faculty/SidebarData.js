@@ -45,6 +45,12 @@ export const SidebarData = [
     cName: 'nav-text'
   },
   {
+    title: 'Community', // 👈 New Entry
+    path: '/faculty/dashboard/Community',
+    icon: <FaIcons.FaComments />,
+    cName: 'nav-text'
+  },
+  {
     title: 'Sign Out',
     path: '/login',
     icon: <FaIcons.FaSignOutAlt />,

@@ -1,13 +1,13 @@
-const express = require('express'); 
-const cors = require('cors'); 
-const mongoose = require('mongoose'); 
+const express = require('express');
+const cors = require('cors');
+const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
 
-const app = express(); 
+const app = express();
 
 app.use(cors());
-app.use(express.json());  
+app.use(express.json());
 
 // MongoDB Atlas connection string
 const dbURI = "mongodb+srv://sheetaldash52:sheetaluni123@cluster0.i2mcn.mongodb.net/portal";
@@ -22,9 +22,9 @@ mongoose
 const userSchema = new mongoose.Schema({
   users: [
     {
-      id: String, 
+      id: String,
       password: String,
-      role: String 
+      role: String
     }
   ]
 });
@@ -38,11 +38,11 @@ const studentSchema = new mongoose.Schema({
   course: { type: String, required: true },
   yearOfAdmission: { type: Number, required: true },
   yearOfGraduation: { type: Number, required: true },
-  academicYear: { type: String, required: true},
-  hod: { type: String, required: true},
-  classAdvisor: { type: String, required: true},
-  classRep: { type: String, required: true},
-  studentRep: { type: String, required: true},
+  academicYear: { type: String, required: true },
+  hod: { type: String, required: true },
+  classAdvisor: { type: String, required: true },
+  classRep: { type: String, required: true },
+  studentRep: { type: String, required: true },
   fathersName: { type: String, required: true },
   mothersName: { type: String, required: true },
   phoneNumber: { type: String, required: true },
@@ -146,9 +146,9 @@ const Activity = mongoose.model('Activity', activitySchema);
 
 const teachingInfoSchema = new mongoose.Schema({
   id: { type: String, required: true, unique: true },
-  teachingInfo: [String], 
-  teachingTT: { type: String },  
-  yearlyCalendar: { type: String },  
+  teachingInfo: [String],
+  teachingTT: { type: String },
+  yearlyCalendar: { type: String },
   teachingSyllabus: [
     {
       branch: { type: String, required: true },
