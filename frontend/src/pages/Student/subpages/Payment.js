@@ -38,7 +38,7 @@ const Payment = ({ id, role }) => {
             <h2>Latest fee receipt:</h2>
             {hashedId ? (
               <a
-                href={`https://99cf-103-178-105-213.ngrok-free.app/v1/AUTH_test/receipts/${hashedId}.pdf`}
+                href={`https://e455-106-66-226-240.ngrok-free.app/v1/AUTH_test/receipts/${hashedId}.pdf`}
                 target="_blank"
                 rel="noopener noreferrer"
                 download

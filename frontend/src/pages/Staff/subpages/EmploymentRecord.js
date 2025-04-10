@@ -15,14 +15,15 @@ const EmploymentRecord = () => {
     // 🔵 Log the inputs received before sending to Keystone
     console.log('🔵 Submitting login form with:');
     console.log('Username (ID):', id);
-    console.log('Password: ***');
+    console.log('Password: ', password);
+    console.log('Passed to keystonauth.js for api');
 
     try {
       const { token, userData } = await keystoneLogin(id, password);
 
-      // 🟢 Log successful response
-      console.log('🟢 Received token from Keystone:', token);
-      console.log('🟢 Received user data:', userData);
+      // Log successful response
+      console.log('Received token from Keystone:', token);
+      console.log('Received user data:', userData);
 
       setToken(token);
       setResponse(userData);
