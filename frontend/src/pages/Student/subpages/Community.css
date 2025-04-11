@@ -57,3 +57,11 @@
     font-style: italic;
     color: #777;
 }
+
+.posted-by {
+    font-size: 14px;
+    color: #0A2647;
+    margin-top: 8px;
+    font-weight: 500;
+    font-style: italic;
+}

@@ -7,12 +7,11 @@ const Community = ({ year, branch }) => {
     useEffect(() => {
         if (!year || !branch) return;
 
-        console.log(`In communit:  Extracted from Home - Year: ${year} Branch: ${branch}`);
+        console.log(`In community: Extracted from Home - Year: ${year} Branch: ${branch}`);
 
         fetch(`http://localhost:8081/api/announcements?year=${encodeURIComponent(year)}&branch=${encodeURIComponent(branch)}`)
             .then(res => res.json())
             .then(data => {
-
                 const announcementList = data.announcements || [];
 
                 if (Array.isArray(announcementList)) {
@@ -40,6 +39,7 @@ const Community = ({ year, branch }) => {
                             <div className="message-content">
                                 <strong>{msg.title}</strong>
                                 <p>{msg.description}</p>
+                                <p className="posted-by">Posted by: {msg.postedBy}</p>
                             </div>
                         </div>
                     ))

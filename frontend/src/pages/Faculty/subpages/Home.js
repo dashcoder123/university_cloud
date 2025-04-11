@@ -1,39 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React from 'react';
 import './Home.css';
-import { useAuth } from '../../../context/AuthContext';  
 
-const Home = () => {
-  const { auth } = useAuth();  
-  const [facultyData, setFacultyData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  const { id, role } = auth; 
-
-  useEffect(() => {
-    if (!id) {
-      setError('Faculty ID is not provided');
-      setLoading(false);
-      return;
-    }
-
-    const fetchFacultyData = async () => {
-      try {
-        const response = await axios.get(`http://localhost:8081/api/faculty/${id}`);
-        setFacultyData(response.data);
-      } catch (err) {
-        setError('Error fetching faculty data');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchFacultyData();
-  }, [id]);
-
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>{error}</div>;
+const Home = ({ facultyData, role }) => {
+  if (!facultyData) return <div>Loading...</div>; // Fallback just in case
 
   return (
     <div className="container">

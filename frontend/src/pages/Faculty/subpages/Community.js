@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Community.css';
 
-const FacultyCommunity = () => {
+const FacultyCommunity = ({ facultyName }) => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [selectedYear, setSelectedYear] = useState('');
@@ -17,6 +17,7 @@ const FacultyCommunity = () => {
             description,
             year: selectedYear,
             branch: selectedBranch,
+            postedBy: facultyName,
         };
 
         try {
@@ -29,7 +30,7 @@ const FacultyCommunity = () => {
             });
 
             if (response.ok) {
-                setStatus(`Posted successfully! "${title}" - ${description}`);
+                setStatus(`Posted successfully -> ${title}: ${description}`);
                 setTitle('');
                 setDescription('');
                 setSelectedYear('');
@@ -54,15 +55,14 @@ const FacultyCommunity = () => {
         ];
 
         return selectedYear === 'Fourth Year'
-            ? allBranches.slice(0, 4) // CST, IT, DS, CE
-            : allBranches;            // all branches
+            ? allBranches.slice(0, 4)
+            : allBranches;
     };
 
     return (
         <div className="faculty-chat-container">
-            <h2 className="chat-header"> Post to Class</h2>
+            <h2 className="chat-header">Post to Class</h2>
             <form onSubmit={handleSubmit} className="faculty-form">
-
                 <select required value={selectedYear} onChange={(e) => setSelectedYear(e.target.value)}>
                     <option value="">Select Year</option>
                     <option value="First Year">First Year</option>

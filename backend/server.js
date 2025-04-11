@@ -150,9 +150,13 @@ const announcementSchema = new mongoose.Schema({
   branch: { type: String, required: true },
   title: { type: String, required: true },
   description: { type: String, required: true },
+  postedBy: { type: String, required: true }, 
 });
 
 const Announcement = mongoose.model('Announcement', announcementSchema);
+
+module.exports = Announcement;
+
 
 
 
@@ -249,7 +253,7 @@ app.post('/login', async (req, res) => {
 app.post('/api/announcements', async (req, res) => {
   const { year, branch, title, description, postedBy } = req.body;
 
-  if (!year || !branch || !title || !description) {
+  if (!year || !branch || !title || !description || !postedBy) {
     return res.status(400).json({ success: false, message: 'All fields are required' });
   }
 
@@ -272,13 +276,14 @@ app.get('/api/announcements', async (req, res) => {
   }
 
   try {
-    const announcements = await Announcement.find({ year, branch }).sort({ postedAt: -1 });
+    const announcements = await Announcement.find({ year, branch });
     res.json({ success: true, announcements });
   } catch (error) {
     console.error('Error fetching announcements:', error);
     res.status(500).json({ success: false, message: 'Server error' });
   }
 });
+
 
 
 
