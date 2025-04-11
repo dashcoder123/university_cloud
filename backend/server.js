@@ -2,8 +2,6 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
-
-
 const app = express();
 
 app.use(cors());
@@ -31,52 +29,6 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model('User ', userSchema);
 
-// Student Schema
-const studentSchema = new mongoose.Schema({
-  id: { type: String, required: true, unique: true },
-  name: { type: String, required: true },
-  course: { type: String, required: true },
-  yearOfAdmission: { type: Number, required: true },
-  yearOfGraduation: { type: Number, required: true },
-  academicYear: { type: String, required: true },
-  hod: { type: String, required: true },
-  classAdvisor: { type: String, required: true },
-  classRep: { type: String, required: true },
-  studentRep: { type: String, required: true },
-  fathersName: { type: String, required: true },
-  mothersName: { type: String, required: true },
-  phoneNumber: { type: String, required: true },
-  alternatePhone: { type: String, required: true },
-  category: { type: String, required: true },
-  prn: { type: String, required: true },
-  abcId: { type: String, required: true },
-  email: { type: String, required: true },
-  course1: { type: String, required: true },
-  course2: { type: String, required: true },
-  course3: { type: String, required: true },
-  course4: { type: String, required: true },
-  course5: { type: String, required: true },
-  course6: { type: String, required: true },
-  lab1: { type: String, required: true },
-  lab2: { type: String, required: true },
-  lab3: { type: String, required: true },
-  lab4: { type: String, required: true },
-  lab5: { type: String, required: true },
-  c1att: { type: String, required: true },
-  c2att: { type: String, required: true },
-  c3att: { type: String, required: true },
-  c4att: { type: String, required: true },
-  c5att: { type: String, required: true },
-  l1att: { type: String, required: true },
-  l2att: { type: String, required: true },
-  l3att: { type: String, required: true },
-  l4att: { type: String, required: true },
-  l5att: { type: String, required: true }
-});
-
-
-const Student = mongoose.model('Student', studentSchema);
-
 
 // Event Schema
 const eventSchema = new mongoose.Schema({
@@ -96,33 +48,6 @@ const notificationSchema = new mongoose.Schema({
 });
 
 const Notification = mongoose.model('Notification', notificationSchema);
-
-
-
-// Faculty Schema
-const facultySchema = new mongoose.Schema({
-  id: { type: String, required: true, unique: true },
-  name: { type: String, required: true },
-  yearOfJoining: { type: Number, required: true },
-  highestEducationQualification: { type: String, required: true },
-  department: { type: String, required: true },
-  specializationAreas: [{ type: String, required: true }],
-  teachingExperience: { type: Number, required: true },
-  workType: { type: String, required: true },
-  position: { type: String, required: true },
-  totalWorkYears: { type: Number, required: true },
-  fathersName: { type: String, required: true },
-  mothersName: { type: String, required: true },
-  spousesName: { type: String },
-  phoneNumber: { type: String, required: true },
-  alternatePhone: { type: String, required: true },
-  residentialAddress: { type: String, required: true },
-  email: { type: String, required: true },
-  dateOfBirth: { type: Date, required: true },
-  nationality: { type: String, required: true },
-});
-
-const Faculty = mongoose.model('Faculty', facultySchema);
 
 
 // Activity Schema
@@ -158,8 +83,6 @@ const Announcement = mongoose.model('Announcement', announcementSchema);
 module.exports = Announcement;
 
 
-
-
 //TeachingInfo Schema
 
 const teachingInfoSchema = new mongoose.Schema({
@@ -176,32 +99,6 @@ const teachingInfoSchema = new mongoose.Schema({
 });
 
 const TeachingInfo = mongoose.model('TeachingInfo', teachingInfoSchema);
-
-
-// Staff Schema
-const staffSchema = new mongoose.Schema({
-  id: { type: String, required: true, unique: true },
-  name: { type: String, required: true },
-  yearOfJoining: { type: Number, required: true },
-  highestEducationQualification: { type: String, required: true },
-  department: { type: String, required: true },
-  role: { type: String, required: true },
-  workType: { type: String, required: true },
-  position: { type: String, required: true },
-  totalWorkYears: { type: Number, required: true },
-  fathersName: { type: String, required: true },
-  mothersName: { type: String, required: true },
-  phoneNumber: { type: String, required: true },
-  alternatePhone: { type: String, required: true },
-  residentialAddress: { type: String, required: true },
-  email: { type: String, required: true },
-  dateOfBirth: { type: Date, required: true },
-  nationality: { type: String, required: true },
-  password: { type: String, required: true }
-});
-
-const Staff = mongoose.model('Staff', staffSchema);
-
 
 
 // Handle login requests
@@ -285,20 +182,6 @@ app.get('/api/announcements', async (req, res) => {
 });
 
 
-
-
-// API endpoint to get student data by ID
-app.get('/api/students/:id', async (req, res) => {
-  try {
-    const student = await Student.findOne({ id: req.params.id });
-    if (!student) return res.status(404).json({ success: false, message: 'Student not found' });
-    res.json(student);
-  } catch (error) {
-    console.error('Error fetching student data:', error);
-    res.status(500).json({ success: false, message: 'Server error' });
-  }
-});
-
 // API endpoint to get all events
 app.get('/api/events', async (req, res) => {
   try {
@@ -317,18 +200,6 @@ app.get('/api/notifications', async (req, res) => {
     res.json(notifications);
   } catch (error) {
     console.error('Error fetching notifications:', error);
-    res.status(500).json({ success: false, message: 'Server error' });
-  }
-});
-
-// API endpoint to get faculty data by ID
-app.get('/api/faculty/:id', async (req, res) => {
-  try {
-    const faculty = await Faculty.findOne({ id: req.params.id });
-    if (!faculty) return res.status(404).json({ success: false, message: 'Faculty not found' });
-    res.json(faculty);
-  } catch (error) {
-    console.error('Error fetching faculty data:', error);
     res.status(500).json({ success: false, message: 'Server error' });
   }
 });
@@ -369,17 +240,10 @@ app.get('/api/teachinginfo/:id', async (req, res) => {
   }
 });
 
-// Endpoint to get staff data by ID
-app.get('/api/staff/:id', async (req, res) => {
-  try {
-    const staff = await Staff.findOne({ id: req.params.id });
-    if (!staff) return res.status(404).json({ success: false, message: 'Staff not found' });
-    res.json(staff);
-  } catch (error) {
-    console.error('Error fetching staff data:', error);
-    res.status(500).json({ success: false, message: 'Server error' });
-  }
-});
+app.use('/api/students', require('./student'));
+app.use('/api/faculty', require('./faculty'));
+app.use('/api/staff', require('./staff'));
+
 
 
 // Start the server
