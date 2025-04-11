@@ -18,6 +18,11 @@ const StudentDashboard = () => {
 
   const [yearBranch, setYearBranch] = useState({ year: '', branch: '' });
 
+  const handleYearBranchExtracted = ({ year, branch }) => {
+    console.log("Extracted from Home:", { year, branch });
+    setYearBranch({ year, branch });
+  };
+
   return (
     <div className="dashboard">
       <Navbar />
@@ -27,14 +32,20 @@ const StudentDashboard = () => {
             <Home
               id={id}
               role={role}
-              onYearBranchExtracted={setYearBranch}
+              onYearBranchExtracted={handleYearBranchExtracted}
             />
           } />
           <Route path="academics" element={<Academics id={id} role={role} />} />
           <Route path="events" element={<Events id={id} role={role} />} />
           <Route path="notifications" element={<Notifications id={id} role={role} />} />
           <Route path="payment" element={<Payment id={id} role={role} />} />
-          <Route path="results" element={<Results id={id} role={role} />} />
+          <Route path="results" element={
+            <Results
+              id={id}
+              role={role}
+              branch={yearBranch.branch}
+            />
+          } />
           <Route path="ticket" element={<TicketCategories id={id} role={role} />} />
           <Route path="community" element={
             <Community

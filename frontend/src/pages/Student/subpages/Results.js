@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Results.css';
 
-const Results = () => {
+const Results = ({ branch }) => {
   const [selectedSemester, setSelectedSemester] = useState('');
   const [selectedYear, setSelectedYear] = useState('');
   const [pdfLink, setPdfLink] = useState('');
@@ -15,12 +15,12 @@ const Results = () => {
   };
 
   const handleSubmit = () => {
-    if (selectedSemester && selectedYear) {
-      const fileName = `${selectedYear}_Semester ${selectedSemester}.pdf`;
+    if (selectedSemester && selectedYear && branch) {
+      const fileName = `${branch}_${selectedYear}_Semester${selectedSemester}.pdf`;
       const link = `https://99cf-103-178-105-213.ngrok-free.app/v1/AUTH_test/results/${fileName}`;
       setPdfLink(link);
     } else {
-      alert("Please select both semester and year.");
+      alert("Please select branch, year, and semester.");
     }
   };
 
@@ -43,14 +43,9 @@ const Results = () => {
             </select>
             <select className='dropdown' value={selectedSemester} onChange={handleSemesterChange}>
               <option value="">Select Semester</option>
-              <option value="1">Semester 1</option>
-              <option value="2">Semester 2</option>
-              <option value="3">Semester 3</option>
-              <option value="4">Semester 4</option>
-              <option value="5">Semester 5</option>
-              <option value="6">Semester 6</option>
-              <option value="7">Semester 7</option>
-              <option value="8">Semester 8</option>
+              {[...Array(8)].map((_, i) => (
+                <option key={i + 1} value={i + 1}>Semester {i + 1}</option>
+              ))}
             </select>
             <button onClick={handleSubmit}>Submit</button>
           </div>
@@ -71,11 +66,9 @@ const Results = () => {
 
         <div className="results-box">
           <h2>Result Updates:</h2>
-          <div className='results-notification'><p>Lorem</p></div>
-          <div className='results-notification'><p>Lorem</p></div>
-          <div className='results-notification'><p>Lorem</p></div>
-          <div className='results-notification'><p>Lorem</p></div>
-          <div className='results-notification'><p>Lorem</p></div>
+          {[...Array(5)].map((_, i) => (
+            <div className='results-notification' key={i}><p>Lorem</p></div>
+          ))}
         </div>
       </div>
     </div>
