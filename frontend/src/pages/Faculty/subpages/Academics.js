@@ -1,20 +1,44 @@
 import React, { useEffect, useState } from 'react';
 import './Academics.css';
-import { FaDownload } from "react-icons/fa";
+import { FaLink } from "react-icons/fa";
 import axios from 'axios';
 
 const Academics = ({ id }) => {
   const [teachingInfo, setTeachingInfo] = useState(null);
+  const [syllabusData, setSyllabusData] = useState([]); 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Fetch teaching info from the backend based on the faculty id
   useEffect(() => {
     const fetchTeachingInfo = async () => {
       try {
-        const response = await axios.get(`http://localhost:8081/api/teachinginfo/${id}`);
-        setTeachingInfo(response.data);
+        // Fetch teaching info (timing, syllabus, etc.)
+        const teachingResponse = await axios.get(`http://localhost:8081/api/teachinginfo/${id}`);
+        setTeachingInfo(teachingResponse.data);
+
+        const syllabusList = [];
+
+        if (teachingResponse.data.teachingSyllabus) {
+          for (const syllabus of teachingResponse.data.teachingSyllabus) {
+            try {
+              // Fetch syllabus link based on courseId 
+              const syllabusResponse = await axios.get(`http://localhost:8081/api/syllabus/${syllabus}`);
+              if (syllabusResponse.data && syllabusResponse.data.syllabusLink) {
+                syllabusList.push({
+                  name: syllabus,
+                  link: syllabusResponse.data.syllabusLink,
+                });
+              }
+            } catch (syllabusErr) {
+              console.warn(`Syllabus not found for ${syllabus}`);
+            }
+          }
+        }
+
+        setSyllabusData(syllabusList);
+
       } catch (err) {
+        console.error(err);
         setError('Error fetching teaching info');
       } finally {
         setLoading(false);
@@ -35,7 +59,7 @@ const Academics = ({ id }) => {
       <div className="academics-container">
         <div className="academics-box">
           <h2>Teaching Information:</h2>
-          {teachingInfo.teachingInfo && teachingInfo.teachingInfo.map((info, index) => (
+          {teachingInfo?.teachingInfo?.map((info, index) => (
             <p key={index}><strong>{info}</strong></p>
           ))}
         </div>
@@ -43,9 +67,21 @@ const Academics = ({ id }) => {
         <div className="academics-box" id='middle-view'>
           <div className='downloads'>
             <h2>Teaching Timetable:</h2>
-            {teachingInfo.teachingTT && (
+            {teachingInfo?.teachingTT && (
               <a href={teachingInfo.teachingTT} target="_blank" rel="noopener noreferrer">
-                <button><FaDownload /></button>
+                <button className="syllabus-button">
+                  <FaLink size={20} />
+                </button>
+              </a>
+            )}
+          </div>
+          <div className='downloads'>
+            <h2>Class Timetable:</h2>
+            {teachingInfo?.classTT && (
+              <a href={teachingInfo.classTT} target="_blank" rel="noopener noreferrer">
+                <button className="syllabus-button">
+                  <FaLink size={20} />
+                </button>
               </a>
             )}
           </div>
@@ -53,15 +89,22 @@ const Academics = ({ id }) => {
 
         <div className="academics-box">
           <h2>Teaching Syllabus:</h2>
-          {teachingInfo.teachingSyllabus && teachingInfo.teachingSyllabus.map((syllabus, index) => (
-            <div key={index} className='downloads'>
-              <h2>{syllabus.branch}:</h2>
-              <a href={syllabus.syll} target="_blank" rel="noopener noreferrer">
-                <button><FaDownload /></button>
-              </a>
-            </div>
-          ))}
+          {syllabusData.length > 0 ? (
+            syllabusData.map((syllabus, index) => (
+              <div key={index} className='downloads'>
+                <h3>{syllabus.name}</h3>
+                <a href={syllabus.link} target="_blank" rel="noopener noreferrer">
+                  <button className="syllabus-button">
+                    <FaLink size={20} />
+                  </button>
+                </a>
+              </div>
+            ))
+          ) : (
+            <p>No syllabus available.</p>
+          )}
         </div>
+
       </div>
     </div>
   );
