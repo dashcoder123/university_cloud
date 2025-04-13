@@ -54,9 +54,15 @@ const Payment = ({ id, role }) => {
 
           <div className='downloads'>
             <h2>Payment Portal:</h2>
-            <button>
-              <FaExternalLinkAlt />
-            </button>
+            <a
+              href="https://sndt.unisuite.in/paylist/umit"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <button>
+                <FaExternalLinkAlt />
+              </button>
+            </a>
           </div>
 
           <div className='downloads'>

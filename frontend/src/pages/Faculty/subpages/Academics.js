@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './Academics.css'; 
+import './Academics.css';
 import { FaDownload } from "react-icons/fa";
 import axios from 'axios';
 
@@ -48,10 +48,6 @@ const Academics = ({ id }) => {
                 <button><FaDownload /></button>
               </a>
             )}
-          </div>
-          <div className='downloads'>
-            <h2>Yearly Calendar:</h2>
-                <button><FaDownload /></button>
           </div>
         </div>
 

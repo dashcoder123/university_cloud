@@ -66,8 +66,8 @@ const Results = ({ branch }) => {
 
         <div className="results-box">
           <h2>Result Updates:</h2>
-          {[...Array(5)].map((_, i) => (
-            <div className='results-notification' key={i}><p>Lorem</p></div>
+          {[...Array(1)].map((_, i) => (
+            <div className='results-notification' key={i}><p>Nov-Dec 2024 Odd Semester Result is out. Kindly download the pdf to view it.</p></div>
           ))}
         </div>
       </div>

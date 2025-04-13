@@ -3,16 +3,16 @@ import "./Chatbot.css";
 
 const faqs = [
     {
-        question: "When does the Semester start?",
-        answer: "The semester starts on June 1st, 2025.",
+        question: "Where can I view the Academic calendar/ When will the next semester start?",
+        answer: "You can find the yearly calendar by heading to the sidebar and clicking on 'Events' 📅",
     },
     {
-        question: "Where is the faculty room?",
-        answer: "The faculty room is on the second floor, Room 204.",
+        question: "Where can i find my timetable?",
+        answer: "Sidebar>>Academics. Here you can access your attendance and PYQ/Notes",
     },
     {
-        question: "When will our results be out?/When will our exams be conducted/When will our exam dates be released?",
-        answer: "Navigate to the 'Raise a Ticket' section. Write a formal email to the Exam Section through 'Exam Related Queries'.",
+        question: "What are the office working hours?/When can I get my railway concession?",
+        answer: "Our office working hours are Monday to Friday, 10:00 AM to 5:00 PM. Railway concession hours are 1:00 PM to 3:00 PM. For any enquiries, feel free to call us at: 82914 09346",
     },
     {
         question: "How do I reset my password?/I don't remember my password",

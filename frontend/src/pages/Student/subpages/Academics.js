@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './Academics.css'; 
+import './Academics.css';
 import { FaDownload } from "react-icons/fa";
 import { FiLink } from "react-icons/fi";
 import axios from 'axios';
@@ -29,10 +29,10 @@ const Academics = ({ id, role }) => {
 
   return (
     <div className="container">
-    <div className="header">
-      <h1 className='Eventbar'><strong>Academics</strong></h1>
-    </div>
-    <div className="academics-container">
+      <div className="header">
+        <h1 className='Eventbar'><strong>Academics</strong></h1>
+      </div>
+      <div className="academics-container">
         <div className="academics-box">
           <h2>Attendance Record:</h2>
           <p><strong>{studentData.course1}</strong> {studentData.c1att}</p>
@@ -50,12 +50,8 @@ const Academics = ({ id, role }) => {
 
         <div className="academics-box" id='middle-view'>
           <div className='downloads'>
-          <h2>Class Timetable:</h2>
-          <button><FaDownload /></button>
-          </div>
-          <div className='downloads'>
-          <h2>Yearly Calendar:</h2>
-          <button><FaDownload /></button>
+            <h2>Class Timetable:</h2>
+            <button><FaDownload /></button>
           </div>
 
         </div>
