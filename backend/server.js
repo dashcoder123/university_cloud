@@ -82,6 +82,18 @@ const Announcement = mongoose.model('Announcement', announcementSchema);
 
 module.exports = Announcement;
 
+//Faculty Community
+
+const facultyAnnouncementSchema = new mongoose.Schema({
+  title: { type: String, required: true },
+  description: { type: String, required: true },
+  postedBy: { type: String, required: true },
+});
+
+const FacultyAnnouncement = mongoose.model('FacultyAnnouncement', facultyAnnouncementSchema);
+module.exports = FacultyAnnouncement;
+
+
 
 //TeachingInfo Schema
 
@@ -177,6 +189,35 @@ app.get('/api/announcements', async (req, res) => {
     res.json({ success: true, announcements });
   } catch (error) {
     console.error('Error fetching announcements:', error);
+    res.status(500).json({ success: false, message: 'Server error' });
+  }
+});
+
+// Fetch all faculty announcements
+app.get('/api/faculty-announcements', async (req, res) => {
+  try {
+    const announcements = await FacultyAnnouncement.find(); 
+    res.json({ success: true, announcements });
+  } catch (error) {
+    console.error('Error fetching faculty announcements:', error);
+    res.status(500).json({ success: false, message: 'Server error' });
+  }
+});
+
+// Faculty creates an announcement
+app.post('/api/faculty-announcements', async (req, res) => {
+  const { title, description, postedBy } = req.body;
+
+  if (!title || !description || !postedBy) {
+    return res.status(400).json({ success: false, message: 'All fields are required' });
+  }
+
+  try {
+    const newFacultyAnnouncement = new FacultyAnnouncement({ title, description, postedBy });
+    await newFacultyAnnouncement.save();
+    res.status(201).json({ success: true, message: 'Faculty Announcement posted successfully' });
+  } catch (error) {
+    console.error('Error posting faculty announcement:', error);
     res.status(500).json({ success: false, message: 'Server error' });
   }
 });

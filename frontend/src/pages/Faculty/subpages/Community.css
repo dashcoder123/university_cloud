@@ -1,14 +1,14 @@
+/* Container for chat + form */
 .faculty-chat-container {
     padding: 20px;
     max-width: 700px;
-    margin: auto;
+    margin: 50px auto 0 auto;
     background-color: #f0f8ff;
     border-radius: 12px;
     box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
-    margin-top: 50px;
-    /* optional: to push it down a bit on the page */
 }
 
+/* Form Styling */
 .faculty-form {
     display: flex;
     flex-direction: column;
@@ -22,8 +22,10 @@
     border: 1px solid #aaa;
     border-radius: 8px;
     font-size: 16px;
+    font-family: inherit;
 }
 
+/* Button Wrapper */
 .button-wrapper {
     display: flex;
     justify-content: center;
@@ -38,21 +40,134 @@
     border-radius: 10px;
     cursor: pointer;
     font-size: 16px;
-    width: auto;
+    transition: background-color 0.3s ease;
 }
 
 .faculty-form button:hover {
     background-color: #07335f;
 }
 
-
-.faculty-form button:hover {
-    background-color: #07335f;
-}
-
+/* Status Message */
 .status-msg {
     font-size: 14px;
     font-style: italic;
     color: #0A2647;
     text-align: center;
+    margin-top: 10px;
+}
+
+/* -------------------------- */
+/* Faculty Community List (Old Block Style - Optional) */
+/* -------------------------- */
+
+.faculty-community-section {
+    margin: 40px auto;
+    padding: 20px;
+    max-width: 700px;
+    background-color: #eaf6ff;
+    border-radius: 12px;
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.05);
+}
+
+.faculty-community-section .chat-header {
+    margin-bottom: 20px;
+    color: #0A2647;
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.faculty-announcements-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.announcement-card {
+    background-color: white;
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.announcement-card h4 {
+    margin: 0 0 8px 0;
+    color: #222;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.announcement-card p {
+    margin: 0 0 10px 0;
+    font-size: 15px;
+    color: #333;
+}
+
+.announcement-card small {
+    font-size: 14px;
+    font-style: italic;
+    color: #0A2647;
+    font-weight: 500;
+}
+
+/* -------------------------- */
+/* Modern Chat-Style Shared Card UI (used for both student/faculty) */
+/* -------------------------- */
+
+.chat-container {
+    max-width: 700px;
+    margin: 40px auto;
+    background-color: #f0faff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+}
+
+.chat-header {
+    text-align: center;
+    color: #0A2647;
+    font-size: 22px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.chat-box {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.chat-message {
+    background-color: #fff;
+    border-radius: 14px;
+    padding: 15px 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.chat-message .message-content strong {
+    font-size: 17px;
+    color: #222;
+    display: block;
+    margin-bottom: 6px;
+}
+
+.chat-message p {
+    margin: 4px 0;
+    font-size: 15px;
+    color: #444;
+}
+
+.posted-by {
+    font-size: 13px;
+    color: #0A2647;
+    font-style: italic;
+    font-weight: 500;
+}
+
+.no-messages {
+    text-align: center;
+    font-style: italic;
+    color: #666;
+    padding: 20px 0;
 }

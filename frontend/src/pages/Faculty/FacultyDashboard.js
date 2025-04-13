@@ -37,8 +37,10 @@ const FacultyDashboard = () => {
     }
   }, [id]);
 
+  // Guard clause for loading and error states
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
+  if (!facultyData) return <div>No faculty data available.</div>;
 
   return (
     <div className="dashboard">
@@ -52,7 +54,7 @@ const FacultyDashboard = () => {
           <Route path="material" element={<TeachingMaterial id={id} role={role} />} />
           <Route path="activity" element={<Activity id={id} role={role} />} />
           <Route path="records" element={<FacultyRecord id={id} role={role} />} />
-          <Route path="community" element={<Community id={id} role={role} facultyName={facultyData.name} />} />
+          <Route path="community" element={<Community facultyName={facultyData.name} position={facultyData.position} />} />
         </Routes>
       </div>
     </div>
