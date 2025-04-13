@@ -50,6 +50,14 @@ const notificationSchema = new mongoose.Schema({
 const Notification = mongoose.model('Notification', notificationSchema);
 
 
+const syllabusSchema = new mongoose.Schema({
+  courseId: { type: String, required: true, unique: true },  
+  syllabusLink: { type: String, required: true },            
+});
+
+const Syllabus = mongoose.model('Syllabus', syllabusSchema);
+
+
 // Activity Schema
 const activitySchema = new mongoose.Schema({
   facultyId: { type: String, required: true, unique: true },
@@ -102,15 +110,11 @@ const teachingInfoSchema = new mongoose.Schema({
   teachingInfo: [String],
   teachingTT: { type: String },
   yearlyCalendar: { type: String },
-  teachingSyllabus: [
-    {
-      branch: { type: String, required: true },
-      syll: { type: String, required: true },
-    },
-  ],
+  teachingSyllabus: [String],
 });
 
 const TeachingInfo = mongoose.model('TeachingInfo', teachingInfoSchema);
+
 
 
 // Handle login requests
@@ -245,6 +249,27 @@ app.get('/api/notifications', async (req, res) => {
   }
 });
 
+// Endpoint to fetch syllabus by course ID
+app.get('/api/syllabus/:courseId', async (req, res) => {
+  try {
+    const syllabus = await Syllabus.findOne({ courseId: req.params.courseId });
+
+    if (!syllabus) {
+      return res.status(404).json({ success: false, message: 'Syllabus not found for this course' });
+    }
+
+    // Return the syllabus link for the course
+    res.json({
+      success: true,
+      syllabusLink: syllabus.syllabusLink,
+    });
+  } catch (error) {
+    console.error('Error fetching syllabus:', error);
+    res.status(500).json({ success: false, message: 'Server error' });
+  }
+});
+
+
 // Endpoint to fetch activities by faculty ID
 app.get('/api/activities/:id', async (req, res) => {
   try {
@@ -265,21 +290,36 @@ app.get('/api/activities/:id', async (req, res) => {
     res.status(500).json({ success: false, message: 'Server error' });
   }
 });
+
+
+
 // Endpoint to fetch teaching info by faculty ID
 app.get('/api/teachinginfo/:id', async (req, res) => {
   try {
+    // Fetch the teaching info document for the given faculty ID
     const teachingInfo = await TeachingInfo.findOne({ id: req.params.id });
 
+    // If no teaching info is found for the given faculty ID, return a 404 error
     if (!teachingInfo) {
       return res.status(404).json({ success: false, message: 'Teaching information not found' });
     }
 
-    res.json(teachingInfo);
+    // Return the data in the required format
+    const formattedTeachingInfo = {
+      id: teachingInfo.id,
+      teachingInfo: teachingInfo.teachingInfo,
+      teachingTT: teachingInfo.teachingTT,
+      teachingSyllabus: teachingInfo.teachingSyllabus
+    };
+
+    // Send the formatted data as the response
+    res.json(formattedTeachingInfo);
   } catch (error) {
     console.error('Error fetching teaching info:', error);
     res.status(500).json({ success: false, message: 'Server error' });
   }
 });
+
 
 app.use('/api/students', require('./student'));
 app.use('/api/faculty', require('./faculty'));
