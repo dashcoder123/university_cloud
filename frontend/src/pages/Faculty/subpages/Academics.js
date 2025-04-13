@@ -2,35 +2,44 @@ import React, { useEffect, useState } from 'react';
 import './Academics.css';
 import { FaLink } from "react-icons/fa";
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom'; // import useNavigate
 
 const Academics = ({ id }) => {
   const [teachingInfo, setTeachingInfo] = useState(null);
-  const [syllabusData, setSyllabusData] = useState([]); 
+  const [syllabusData, setSyllabusData] = useState([]);
+  const [facultyTTLink, setFacultyTTLink] = useState(null);
+  const [classTTLink, setClassTTLink] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const navigate = useNavigate(); // useNavigate hook
 
   useEffect(() => {
     const fetchTeachingInfo = async () => {
       try {
-        // Fetch teaching info (timing, syllabus, etc.)
         const teachingResponse = await axios.get(`http://localhost:8081/api/teachinginfo/${id}`);
         setTeachingInfo(teachingResponse.data);
 
-        const syllabusList = [];
+        // Fetch timetable links
+        const facultyResponse = await axios.get(`http://localhost:8081/api/syllabus/facultytt`);
+        if (facultyResponse.data && facultyResponse.data.syllabusLink) {
+          setFacultyTTLink(facultyResponse.data.syllabusLink);
+        }
 
+        const classResponse = await axios.get(`http://localhost:8081/api/syllabus/classtt`);
+        if (classResponse.data && classResponse.data.syllabusLink) {
+          setClassTTLink(classResponse.data.syllabusLink);
+        }
+
+        const syllabusList = [];
         if (teachingResponse.data.teachingSyllabus) {
           for (const syllabus of teachingResponse.data.teachingSyllabus) {
-            try {
-              // Fetch syllabus link based on courseId 
-              const syllabusResponse = await axios.get(`http://localhost:8081/api/syllabus/${syllabus}`);
-              if (syllabusResponse.data && syllabusResponse.data.syllabusLink) {
-                syllabusList.push({
-                  name: syllabus,
-                  link: syllabusResponse.data.syllabusLink,
-                });
-              }
-            } catch (syllabusErr) {
-              console.warn(`Syllabus not found for ${syllabus}`);
+            const syllabusResponse = await axios.get(`http://localhost:8081/api/syllabus/${syllabus}`);
+            if (syllabusResponse.data && syllabusResponse.data.syllabusLink) {
+              syllabusList.push({
+                name: syllabus,
+                link: syllabusResponse.data.syllabusLink,
+              });
             }
           }
         }
@@ -67,8 +76,8 @@ const Academics = ({ id }) => {
         <div className="academics-box" id='middle-view'>
           <div className='downloads'>
             <h2>Teaching Timetable:</h2>
-            {teachingInfo?.teachingTT && (
-              <a href={teachingInfo.teachingTT} target="_blank" rel="noopener noreferrer">
+            {facultyTTLink && (
+              <a href={facultyTTLink} target="_blank" rel="noopener noreferrer">
                 <button className="syllabus-button">
                   <FaLink size={20} />
                 </button>
@@ -77,8 +86,8 @@ const Academics = ({ id }) => {
           </div>
           <div className='downloads'>
             <h2>Class Timetable:</h2>
-            {teachingInfo?.classTT && (
-              <a href={teachingInfo.classTT} target="_blank" rel="noopener noreferrer">
+            {classTTLink && (
+              <a href={classTTLink} target="_blank" rel="noopener noreferrer">
                 <button className="syllabus-button">
                   <FaLink size={20} />
                 </button>
@@ -104,10 +113,9 @@ const Academics = ({ id }) => {
             <p>No syllabus available.</p>
           )}
         </div>
-
       </div>
     </div>
   );
-}
+};
 
 export default Academics;

@@ -108,8 +108,6 @@ module.exports = FacultyAnnouncement;
 const teachingInfoSchema = new mongoose.Schema({
   id: { type: String, required: true, unique: true },
   teachingInfo: [String],
-  teachingTT: { type: String },
-  yearlyCalendar: { type: String },
   teachingSyllabus: [String],
 });
 

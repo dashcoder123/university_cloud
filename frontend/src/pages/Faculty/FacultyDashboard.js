@@ -51,7 +51,7 @@ const FacultyDashboard = () => {
           <Route path="academics" element={<Academics id={id} role={role} />} />
           <Route path="events" element={<Events id={id} role={role} />} />
           <Route path="notifications" element={<Notifications id={id} role={role} />} />
-          <Route path="material" element={<TeachingMaterial id={id} role={role} />} />
+          <Route path="material" element={<TeachingMaterial id={id} />} />
           <Route path="activity" element={<Activity id={id} role={role} />} />
           <Route path="records" element={<FacultyRecord id={id} role={role} />} />
           <Route path="community" element={<Community facultyName={facultyData.name} position={facultyData.position} />} />
