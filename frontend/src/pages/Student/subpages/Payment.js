@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { FiLink } from "react-icons/fi";
 import { FaDownload, FaExternalLinkAlt } from "react-icons/fa";
 import axios from 'axios';
 import './Payment.css';
@@ -7,6 +6,7 @@ import './Payment.css';
 const Payment = ({ id, role }) => {
   const [hashedId, setHashedId] = useState('');
   const [paymentPortalLink, setPaymentPortalLink] = useState(null);
+  const [outstandingFeesLink, setOutstandingFeesLink] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -28,10 +28,18 @@ const Payment = ({ id, role }) => {
           console.log("Hashed ID:", hashed);
         }
 
-        const response = await axios.get(`http://localhost:8081/api/syllabus/paymentportal`);
-        if (response.data && response.data.syllabusLink) {
-          setPaymentPortalLink(response.data.syllabusLink);
+        // Fetch payment portal link
+        const paymentResponse = await axios.get(`http://localhost:8081/api/syllabus/paymentportal`);
+        if (paymentResponse.data && paymentResponse.data.syllabusLink) {
+          setPaymentPortalLink(paymentResponse.data.syllabusLink);
         }
+
+        // Fetch outstanding fees link
+        const feesResponse = await axios.get(`http://localhost:8081/api/syllabus/outstandingfees`);
+        if (feesResponse.data && feesResponse.data.syllabusLink) {
+          setOutstandingFeesLink(feesResponse.data.syllabusLink);
+        }
+
       } catch (err) {
         console.error('Error fetching data', err);
         setError('Error fetching data');
@@ -87,9 +95,18 @@ const Payment = ({ id, role }) => {
 
           <div className='downloads'>
             <h2>Outstanding fees:</h2>
-            <button>
-              <FaDownload />
-            </button>
+            {outstandingFeesLink ? (
+              <a
+                href={outstandingFeesLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                download
+              >
+                <button><FaDownload /></button>
+              </a>
+            ) : (
+              <p>Not available</p>
+            )}
           </div>
 
         </div>

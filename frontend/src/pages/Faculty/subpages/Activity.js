@@ -67,7 +67,6 @@ const Activity = () => {
                       <span className="activity-title">{activity.name}</span>
                       {expandedActivities[key] && (
                         <div className="activity-details">
-                          <p><strong>Description:</strong> {activity.description || "No details available."}</p>
                           <p><strong>Link:</strong> <a href={activity.url} target="_blank" rel="noopener noreferrer">{activity.url}</a></p>
                         </div>
                       )}

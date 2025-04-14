@@ -70,20 +70,17 @@ p strong {
 button {
   background-color: #0A2647;
   color: #E3F6FF;
-  font-size: 50px;
-  /* Increased font size */
-  padding: 10px 25px;
+  font-size: 18px;            /* Reduced from 50px */
+  padding: 8px 20px;          /* Reduced padding */
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  width: 50%;
-  /* Makes width match content */
+  width: auto;                /* Adjusts to fit the content */
   margin: 10px auto;
-  /* Center the button */
   display: block;
-  /* Block to center with margin auto */
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
+
 
 
 button:hover {
