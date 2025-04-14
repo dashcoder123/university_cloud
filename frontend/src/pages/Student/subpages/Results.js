@@ -8,9 +8,6 @@ const Results = ({ branch, cgpa, percentage }) => {
 
   // Debug log to check props
   useEffect(() => {
-    console.log("Branch:", branch);
-    console.log("CGPA:", cgpa);
-    console.log("Percentage:", percentage);
   }, [branch, cgpa, percentage]);
 
   const handleSemesterChange = (event) => {
