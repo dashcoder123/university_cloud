@@ -1,34 +1,107 @@
+/* Container for everything */
 .container {
     padding: 30px;
-    max-width: 1200px; /* Optional: Set a max-width for better centering */
-    margin: 0 auto; /* Centers the container */
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Centers all child elements horizontally */
+    justify-content: flex-start;
+    /* Align items from the top */
+    text-align: center;
+    /* Center text inside the container */
 }
 
-body {
-    background-color: #f4f4f4;
-}
-
+/* Header styling */
 .header {
     display: flex;
-    justify-content: center; /* Center-aligns the content horizontally */
+    justify-content: center;
     align-items: center;
     background-color: #0A2647;
     padding: 20px;
     border-radius: 20px;
     margin-bottom: 30px;
+    width: 100%;
 }
 
+/* Event title */
 .Eventbar {
     font-size: 35px;
     color: #E3F6FF;
-    text-align: center; /* Center-aligns the text within the header */
 }
 
+/* Manage Calendar button container */
+.calendar-controls {
+    display: flex;
+    justify-content: center;
+    /* Ensures the button is centered */
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.container .calendar-controls .manage-btn {
+    background-color: #0A2647;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: block;
+    margin: 0 auto;
+}
+
+
+/* Button styling */
+.manage-btn {
+    background-color: #0A2647;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Hover effect for the button */
+.manage-btn:hover {
+    background-color: #144e88;
+}
+
+/* Calendar container */
+.calendar-container {
+    margin-bottom: 30px;
+    border: 2px solid #d1d1d1;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 900px;
+    margin-top: 20px;
+}
+
+/* Each event box */
 .info-box {
     width: 100%;
+    max-width: 600px;
+    /* Limit the width */
     padding: 20px;
     border: 2px solid #295F98;
     border-radius: 10px;
     background-color: #f5f7fa;
     margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Event title inside info box */
+.info-box h3 {
+    margin-bottom: 10px;
+}
+
+/* Event description and other info */
+.info-box p {
+    margin: 10px 0;
 }

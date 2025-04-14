@@ -27,7 +27,7 @@ const Results = ({ branch, cgpa, percentage }) => {
       const link = `https://99cf-103-178-105-213.ngrok-free.app/v1/AUTH_test/results/${fileName}`;
       setPdfLink(link);
     } else {
-      alert("Please select branch, year, and semester.");
+      alert("Please select year and semester.");
     }
   };
 

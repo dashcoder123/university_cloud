@@ -2,7 +2,7 @@
   padding: 30px;
 }
 
-body{
+body {
   background-color: #f4f4f4;
 }
 
@@ -28,19 +28,23 @@ body{
   color: #E3F6FF;
 }
 
-.details-container {
+.details-row {
   display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap; 
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-bottom: 30px;
 }
 
-.details-box {
-  width: 45%;
+/* Increased the width of details-box */
+div.details-box {
+  width: 100% !important;
+  /* Use !important to override other styles */
   padding: 20px;
   border: 2px solid #295F98;
   border-radius: 10px;
   background-color: #f5f7fa;
-  margin-bottom: 20px;
 }
 
 .details-box h2 {
@@ -57,32 +61,36 @@ p strong {
   color: #333;
 }
 
-
 @media (max-width: 768px) {
-  .details-box {
-    width: 100%; 
-    margin-bottom: 20px;
-  }
-
   .header {
-    flex-direction: column; 
+    flex-direction: column;
     text-align: center;
   }
 
   .profile-img {
-      width: 70px;
-      height: 70px;
-      border-radius: 50%;
-      margin-right: 10px;
-      margin-left: 0px;
-      margin-bottom: 10px;
-    }
-    .Namebar {
-      font-size: 20px; 
-      white-space: pre-line; 
-    }
-    .details-box h2{
-      font-size: 22px;
-    }
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin-right: 10px;
+    margin-left: 0px;
+    margin-bottom: 10px;
+  }
 
+  .Namebar {
+    font-size: 20px;
+    white-space: pre-line;
+  }
+
+  .details-row {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  div.details-box {
+    width: 100% !important;
+  }
+
+  .details-box h2 {
+    font-size: 22px;
+  }
 }
