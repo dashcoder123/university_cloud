@@ -1,7 +1,9 @@
 .container {
     padding: 30px;
-    max-width: 1200px; /* Optional: Set a max-width for better centering */
-    margin: 0 auto; /* Centers the container */
+    max-width: 1200px;
+    /* Optional: Set a max-width for better centering */
+    margin: 0 auto;
+    /* Centers the container */
 }
 
 body {
@@ -10,7 +12,8 @@ body {
 
 .header {
     display: flex;
-    justify-content: center; /* Center-aligns the content horizontally */
+    justify-content: center;
+    /* Center-aligns the content horizontally */
     align-items: center;
     background-color: #0A2647;
     padding: 20px;
@@ -21,7 +24,8 @@ body {
 .Recordbar {
     font-size: 35px;
     color: #E3F6FF;
-    text-align: center; /* Center-aligns the text within the header */
+    text-align: center;
+    /* Center-aligns the text within the header */
 }
 
 .info-box {
@@ -31,4 +35,20 @@ body {
     border-radius: 10px;
     background-color: #f5f7fa;
     margin-bottom: 20px;
+}
+
+.submit-btn {
+    background-color: #0A2647;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 15px;
+}
+
+.submit-btn:hover {
+    background-color: #295F98;
 }
