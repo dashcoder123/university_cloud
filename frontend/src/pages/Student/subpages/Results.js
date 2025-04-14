@@ -21,7 +21,7 @@ const Results = ({ branch, cgpa, percentage }) => {
   const handleSubmit = () => {
     if (selectedSemester && selectedYear && branch) {
       const fileName = `${branch}_${selectedYear}_Semester${selectedSemester}.pdf`;
-      const link = `https://99cf-103-178-105-213.ngrok-free.app/v1/AUTH_test/results/${fileName}`;
+      const link = `https://e455-106-66-226-240.ngrok-free.app/v1/AUTH_test/results/${fileName}`;
       setPdfLink(link);
     } else {
       alert("Please select year and semester.");
