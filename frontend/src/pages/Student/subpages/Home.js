@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import './Home.css'; 
+import './Home.css';
 
-const Home = ({ id, role, onYearBranchExtracted }) => {
+const Home = ({ id, role, onYearBranchExtracted, onStudentDataFetched }) => {
   const [studentData, setStudentData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -16,11 +16,19 @@ const Home = ({ id, role, onYearBranchExtracted }) => {
         const extractedYear = response.data.academicYear;
         const extractedBranch = response.data.course;
 
-        //Send year and branch to parent
+        // Send year and branch to parent
         if (onYearBranchExtracted) {
           onYearBranchExtracted({
             year: extractedYear,
-            branch: extractedBranch
+            branch: extractedBranch,
+          });
+        }
+
+        // Send cgpa and percentage to parent
+        if (onStudentDataFetched) {
+          onStudentDataFetched({
+            cgpa: response.data.cgpa,
+            percentage: response.data.percentage,
           });
         }
       } catch (err) {
@@ -32,7 +40,7 @@ const Home = ({ id, role, onYearBranchExtracted }) => {
     };
 
     fetchStudentData();
-  }, [id, onYearBranchExtracted]);
+  }, [id, onYearBranchExtracted, onStudentDataFetched]);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
@@ -40,7 +48,7 @@ const Home = ({ id, role, onYearBranchExtracted }) => {
   return (
     <div className="container">
       <div className="header">
-        <h1 className='Namebar'>
+        <h1 className="Namebar">
           <strong>Welcome, {role === 'Student' ? studentData.name : 'Student'}!</strong>
         </h1>
       </div>
@@ -55,7 +63,7 @@ const Home = ({ id, role, onYearBranchExtracted }) => {
           <p><strong>Head of Department:</strong> {studentData.hod}</p>
           <p><strong>Class Advisor:</strong> {studentData.classAdvisor}</p>
           <p><strong>Class Representative:</strong> {studentData.classRep}</p>
-          <p><strong>Student Representative:</strong> {studentData.studentRep}</p>  
+          <p><strong>Student Representative:</strong> {studentData.studentRep}</p>
           <p><strong>Average CGPA:</strong> {studentData.cgpa || 'N/A'}</p>
           <p><strong>Average Percentage:</strong> {studentData.percentage || 'N/A'}</p>
         </div>

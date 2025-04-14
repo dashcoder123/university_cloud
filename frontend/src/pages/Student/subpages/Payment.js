@@ -73,18 +73,6 @@ const Payment = ({ id, role }) => {
           </div>
         </div>
 
-        <div className="results-box">
-          <h2>Payment Updates:</h2>
-          <div className="info-box">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed laoreet nisi at elit venenatis fringilla. Cras ut semper quam, sit. <FiLink />
-          </div>
-          <div className="info-box">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed laoreet nisi at elit venenatis fringilla. Cras ut semper quam, sit. <FiLink />
-          </div>
-          <div className="info-box">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed laoreet nisi at elit venenatis fringilla. Cras ut semper quam, sit. <FiLink />
-          </div>
-        </div>
       </div>
     </div>
   );

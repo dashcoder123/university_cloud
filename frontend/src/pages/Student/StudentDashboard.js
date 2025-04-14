@@ -17,9 +17,16 @@ const StudentDashboard = () => {
   const { id, role } = auth;
 
   const [yearBranch, setYearBranch] = useState({ year: '', branch: '' });
+  const [cgpa, setCgpa] = useState(null);
+  const [percentage, setPercentage] = useState(null);
 
   const handleYearBranchExtracted = ({ year, branch }) => {
     setYearBranch({ year, branch });
+  };
+
+  const handleStudentDataFetched = ({ cgpa, percentage }) => {
+    setCgpa(cgpa);
+    setPercentage(percentage);
   };
 
   return (
@@ -32,9 +39,10 @@ const StudentDashboard = () => {
               id={id}
               role={role}
               onYearBranchExtracted={handleYearBranchExtracted}
+              onStudentDataFetched={handleStudentDataFetched}
             />
           } />
-          <Route path="academics" element={<Academics id={id} year={yearBranch.year} branch={yearBranch.branch}  />} />
+          <Route path="academics" element={<Academics id={id} year={yearBranch.year} branch={yearBranch.branch} />} />
           <Route path="events" element={<Events id={id} role={role} />} />
           <Route path="notifications" element={<Notifications id={id} role={role} />} />
           <Route path="payment" element={<Payment id={id} role={role} />} />
@@ -43,6 +51,8 @@ const StudentDashboard = () => {
               id={id}
               role={role}
               branch={yearBranch.branch}
+              cgpa={cgpa}
+              percentage={percentage}
             />
           } />
           <Route path="ticket" element={<TicketCategories id={id} role={role} />} />

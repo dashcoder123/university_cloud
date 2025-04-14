@@ -1,10 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Results.css';
 
-const Results = ({ branch }) => {
+const Results = ({ branch, cgpa, percentage }) => {
   const [selectedSemester, setSelectedSemester] = useState('');
   const [selectedYear, setSelectedYear] = useState('');
   const [pdfLink, setPdfLink] = useState('');
+
+  // Debug log to check props
+  useEffect(() => {
+    console.log("Branch:", branch);
+    console.log("CGPA:", cgpa);
+    console.log("Percentage:", percentage);
+  }, [branch, cgpa, percentage]);
 
   const handleSemesterChange = (event) => {
     setSelectedSemester(event.target.value);
@@ -60,8 +67,8 @@ const Results = ({ branch }) => {
 
         <div className="results-box">
           <h2>Current Scores:</h2>
-          <p><strong>Current Percentage:</strong> 80.81%</p>
-          <p><strong>Current CGPA:</strong> 8.94 CGPA</p>
+          <p><strong>Current Percentage:</strong> {percentage || 'N/A'}</p>
+          <p><strong>Current CGPA:</strong> {cgpa || 'N/A'} CGPA</p>
         </div>
       </div>
     </div>
