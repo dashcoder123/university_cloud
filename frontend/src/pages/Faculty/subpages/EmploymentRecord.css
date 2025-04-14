@@ -1,9 +1,7 @@
 .container {
     padding: 30px;
     max-width: 1200px;
-    /* Optional: Set a max-width for better centering */
     margin: 0 auto;
-    /* Centers the container */
 }
 
 body {
@@ -13,7 +11,6 @@ body {
 .header {
     display: flex;
     justify-content: center;
-    /* Center-aligns the content horizontally */
     align-items: center;
     background-color: #0A2647;
     padding: 20px;
@@ -25,7 +22,6 @@ body {
     font-size: 35px;
     color: #E3F6FF;
     text-align: center;
-    /* Center-aligns the text within the header */
 }
 
 .info-box {
@@ -37,18 +33,36 @@ body {
     margin-bottom: 20px;
 }
 
-.submit-btn {
-    background-color: #0A2647;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-top: 15px;
+.record-boxes {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
-.submit-btn:hover {
-    background-color: #295F98;
+.record-link-box {
+    flex: 1;
+    text-decoration: none;
+    background-color: #E3F6FF;
+    border: 2px solid #295F98;
+    border-radius: 10px;
+    padding: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #0A2647;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.record-link-box:hover {
+    background-color: #d4ecff;
+    transform: translateY(-2px);
+    cursor: pointer;
+}
+
+.link-icon {
+    font-size: 20px;
 }

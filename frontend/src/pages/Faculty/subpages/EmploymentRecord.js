@@ -1,5 +1,6 @@
-import React from 'react'
-import './EmploymentRecord.css'
+import React from 'react';
+import './EmploymentRecord.css';
+import { FaLink } from 'react-icons/fa'; // FontAwesome link icon
 
 const EmploymentRecord = () => {
   return (
@@ -9,11 +10,30 @@ const EmploymentRecord = () => {
       </div>
 
       <div className="info-box">
-        {/* You can add form fields here if needed */}
-        <button className="submit-btn" type="submit">Submit</button>
+        <div className="record-boxes">
+          <a
+            href="https://example.com/payroll"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="record-link-box"
+          >
+            <FaLink className="link-icon" />
+            Payroll
+          </a>
+
+          <a
+            href="https://example.com/confidential"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="record-link-box"
+          >
+            <FaLink className="link-icon" />
+            Confidential
+          </a>
+        </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default EmploymentRecord
+export default EmploymentRecord;
