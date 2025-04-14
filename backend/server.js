@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const app = express();
 
+
 app.use(cors());
 app.use(express.json());
 
@@ -29,6 +30,25 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model('User ', userSchema);
 
+//Attendance Schema
+const attendanceSchema = new mongoose.Schema({
+  year: {
+    type: String,
+    required: true
+  },
+  branch: {
+    type: String,
+    required: true
+  },
+  attendance: {
+    type: String, 
+    required: true
+  }
+});
+
+const Attendance = mongoose.model('Attendance', attendanceSchema);
+module.exports = Attendance;
+
 
 // Event Schema
 const eventSchema = new mongoose.Schema({
@@ -49,7 +69,7 @@ const notificationSchema = new mongoose.Schema({
 
 const Notification = mongoose.model('Notification', notificationSchema);
 
-
+//Syllabus Schema
 const syllabusSchema = new mongoose.Schema({
   courseId: { type: String, required: true, unique: true },  
   syllabusLink: { type: String, required: true },            
@@ -177,6 +197,29 @@ app.post('/api/announcements', async (req, res) => {
     res.status(500).json({ success: false, message: 'Server error' });
   }
 });
+
+app.get('/api/attendances', async (req, res) => {
+  const { year, branch } = req.query;
+
+  if (!year || !branch) {
+    return res.status(400).json({ success: false, message: 'Year and branch are required' });
+  }
+
+  try {
+    const attendanceRecords = await Attendance.find({ year, branch });
+
+    if (!attendanceRecords || attendanceRecords.length === 0) {
+      return res.status(404).json({ success: false, message: 'No attendance records found' });
+    }
+
+    return res.json({ success: true, attendanceRecords });
+  } catch (error) {
+    console.error('Error fetching attendance:', error);
+    return res.status(500).json({ success: false, message: 'Server error' });
+  }
+});
+
+
 
 // Students fetch announcements
 app.get('/api/announcements', async (req, res) => {
