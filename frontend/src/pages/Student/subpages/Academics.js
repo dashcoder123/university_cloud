@@ -35,17 +35,7 @@ const Academics = ({ id, role }) => {
       <div className="academics-container">
         <div className="academics-box">
           <h2>Attendance Record:</h2>
-          <p><strong>{studentData.course1}</strong> {studentData.c1att}</p>
-          <p><strong>{studentData.course2}</strong> {studentData.c2att}</p>
-          <p><strong>{studentData.course3}</strong> {studentData.c3att}</p>
-          <p><strong>{studentData.course4}</strong> {studentData.c4att}</p>
-          <p><strong>{studentData.course5}</strong> {studentData.c5att}</p>
-          <p><strong>{studentData.lab1}</strong> {studentData.l1att}</p>
-          <p><strong>{studentData.lab2}</strong> {studentData.l2att}</p>
-          <p><strong>{studentData.lab3}</strong> {studentData.l3att}</p>
-          <p><strong>{studentData.lab4}</strong> {studentData.l4att}</p>
-          <p><strong>{studentData.lab5}</strong> {studentData.l5att}</p>
-
+          {/* You can plug in studentData.attendance or similar here */}
         </div>
 
         <div className="academics-box" id='middle-view'>

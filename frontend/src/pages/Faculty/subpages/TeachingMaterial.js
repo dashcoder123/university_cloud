@@ -6,7 +6,7 @@ const TeachingMaterial = ({ id }) => {
   const [teachingInfo, setTeachingInfo] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [syllabusLink, setSyllabusLink] = useState('');
+  const [setSyllabusLink] = useState('');
 
   useEffect(() => {
     const fetchTeachingInfo = async () => {

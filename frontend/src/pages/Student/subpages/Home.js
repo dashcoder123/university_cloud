@@ -16,9 +16,7 @@ const Home = ({ id, role, onYearBranchExtracted }) => {
         const extractedYear = response.data.academicYear;
         const extractedBranch = response.data.course;
 
-        console.log("📤 Extracted from Home - Year:", extractedYear, "Branch:", extractedBranch);
-
-        // 🔥 Send year and branch to parent
+        //Send year and branch to parent
         if (onYearBranchExtracted) {
           onYearBranchExtracted({
             year: extractedYear,
@@ -26,7 +24,7 @@ const Home = ({ id, role, onYearBranchExtracted }) => {
           });
         }
       } catch (err) {
-        console.error("❌ Error fetching student data:", err);
+        console.error("Error fetching student data:", err);
         setError('Error fetching student data');
       } finally {
         setLoading(false);

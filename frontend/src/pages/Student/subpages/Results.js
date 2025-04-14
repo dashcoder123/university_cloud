@@ -63,13 +63,6 @@ const Results = ({ branch }) => {
           <p><strong>Current Percentage:</strong> 80.81%</p>
           <p><strong>Current CGPA:</strong> 8.94 CGPA</p>
         </div>
-
-        <div className="results-box">
-          <h2>Result Updates:</h2>
-          {[...Array(1)].map((_, i) => (
-            <div className='results-notification' key={i}><p>Nov-Dec 2024 Odd Semester Result is out. Kindly download the pdf to view it.</p></div>
-          ))}
-        </div>
       </div>
     </div>
   );

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import './Academics.css';
 import { FaLink } from "react-icons/fa";
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom'; // import useNavigate
 
 const Academics = ({ id }) => {
   const [teachingInfo, setTeachingInfo] = useState(null);
@@ -11,8 +10,6 @@ const Academics = ({ id }) => {
   const [classTTLink, setClassTTLink] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
-  const navigate = useNavigate(); // useNavigate hook
 
   useEffect(() => {
     const fetchTeachingInfo = async () => {
