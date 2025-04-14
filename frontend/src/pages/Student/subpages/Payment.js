@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { FiLink } from "react-icons/fi";
-import { FaDownload } from "react-icons/fa";
-import { FaExternalLinkAlt } from "react-icons/fa";
-
+import { FaDownload, FaExternalLinkAlt } from "react-icons/fa";
+import axios from 'axios';
 import './Payment.css';
 
 const Payment = ({ id, role }) => {
   const [hashedId, setHashedId] = useState('');
+  const [paymentPortalLink, setPaymentPortalLink] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   // Hash function to generate SHA-1 of PRN
   const hashPRN = async (input) => {
@@ -18,13 +20,31 @@ const Payment = ({ id, role }) => {
   };
 
   useEffect(() => {
-    if (id) {
-      hashPRN(id).then(hashed => {
-        console.log("Hashed ID:", hashed);
-        setHashedId(hashed);
-      });
-    }
+    const fetchData = async () => {
+      try {
+        if (id) {
+          const hashed = await hashPRN(id);
+          setHashedId(hashed);
+          console.log("Hashed ID:", hashed);
+        }
+
+        const response = await axios.get(`http://localhost:8081/api/syllabus/paymentportal`);
+        if (response.data && response.data.syllabusLink) {
+          setPaymentPortalLink(response.data.syllabusLink);
+        }
+      } catch (err) {
+        console.error('Error fetching data', err);
+        setError('Error fetching data');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
   }, [id]);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>{error}</div>;
 
   return (
     <div className="container">
@@ -43,9 +63,7 @@ const Payment = ({ id, role }) => {
                 rel="noopener noreferrer"
                 download
               >
-                <button>
-                  <FaDownload />
-                </button>
+                <button><FaDownload /></button>
               </a>
             ) : (
               <p className="error-text">No ID available for receipt.</p>
@@ -54,15 +72,17 @@ const Payment = ({ id, role }) => {
 
           <div className='downloads'>
             <h2>Payment Portal:</h2>
-            <a
-              href="https://sndt.unisuite.in/paylist/umit"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <button>
-                <FaExternalLinkAlt />
-              </button>
-            </a>
+            {paymentPortalLink ? (
+              <a
+                href={paymentPortalLink}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <button><FaExternalLinkAlt /></button>
+              </a>
+            ) : (
+              <p>Portal not available</p>
+            )}
           </div>
 
           <div className='downloads'>
@@ -71,8 +91,8 @@ const Payment = ({ id, role }) => {
               <FaDownload />
             </button>
           </div>
-        </div>
 
+        </div>
       </div>
     </div>
   );
