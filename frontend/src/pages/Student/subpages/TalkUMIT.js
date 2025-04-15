@@ -1,21 +1,37 @@
 import React, { useState, useEffect } from 'react';
 import './TalkUMIT.css';
+import { Filter } from 'bad-words';  // Import profanity filter
 
-const TalkUMIT = ({ studentName }) => {  // Receive studentName as a prop
+const TalkUMIT = ({ studentName }) => {
     const [category, setCategory] = useState('');
     const [message, setMessage] = useState('');
     const [status, setStatus] = useState('');
     const [posts, setPosts] = useState([]);
-    const [filterCategory, setFilterCategory] = useState('');  // Filter for category
+    const [filterCategory, setFilterCategory] = useState('');
+    const filter = new Filter();  // Initialize the profanity filter
+
+    // Hindi abusive words list
+    const hindiProfanities = [
+        'kutti', 'chutiya', 'chu', 'randi', 'bdsk', 'msdk', 'maa ki', // Add more words as needed
+    ];
+
+    // Function to check for Hindi profanities
+    const containsHindiProfanity = (message) => {
+        return hindiProfanities.some((word) => message.toLowerCase().includes(word));
+    };
 
     useEffect(() => {
         const fetchPosts = async () => {
             try {
                 const response = await fetch('http://localhost:8081/api/talks');
                 const data = await response.json();
-
                 if (data.success) {
-                    setPosts(data.talks.reverse()); // Show latest first
+                    // Sanitize descriptions before setting posts
+                    const sanitizedPosts = data.talks.map(post => ({
+                        ...post,
+                        description: filter.clean(post.description), // Clean description
+                    }));
+                    setPosts(sanitizedPosts.reverse());
                 } else {
                     console.error('Failed to fetch student discussions');
                 }
@@ -29,12 +45,19 @@ const TalkUMIT = ({ studentName }) => {  // Receive studentName as a prop
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        // Check for profanity in both English and Hindi
+        if (filter.isProfane(message) || containsHindiProfanity(message)) {
+            setStatus('Your message contains inappropriate language. Please remove it.');
+            return;
+        }
+
         setStatus('Posting...');
 
         const postData = {
             title: category,
             description: message,
-            postedBy: studentName,  // Use the passed studentName
+            postedBy: studentName,
         };
 
         try {
@@ -54,7 +77,14 @@ const TalkUMIT = ({ studentName }) => {  // Receive studentName as a prop
                 // Refresh posts
                 const newPosts = await fetch('http://localhost:8081/api/talks');
                 const newData = await newPosts.json();
-                if (newData.success) setPosts(newData.talks.reverse());
+                if (newData.success) {
+                    // Sanitize new posts before setting
+                    const sanitizedNewPosts = newData.talks.map(post => ({
+                        ...post,
+                        description: filter.clean(post.description), // Clean description
+                    }));
+                    setPosts(sanitizedNewPosts.reverse());
+                }
             } else {
                 setStatus('Failed to post.');
             }
@@ -64,13 +94,6 @@ const TalkUMIT = ({ studentName }) => {  // Receive studentName as a prop
         }
     };
 
-    // Helper function to format the date and time
-    const formatDate = (dateString) => {
-        const date = new Date(dateString);
-        return date.toLocaleString();  // Format as "MM/DD/YYYY, HH:MM AM/PM"
-    };
-
-    // Filter posts by category
     const filteredPosts = filterCategory
         ? posts.filter((post) => post.title === filterCategory)
         : posts;
@@ -127,7 +150,7 @@ const TalkUMIT = ({ studentName }) => {  // Receive studentName as a prop
                                     <p><strong>{post.title}</strong></p>
                                     <p>{post.description}</p>
                                     <p className="posted-by">Posted by: {post.postedBy}</p>
-                                    <p className="post-time">{formatDate(post.timestamp)}</p> {/* Display the formatted timestamp */}
+                                    <p className="post-time">{new Date(post.timestamp).toLocaleString()}</p>
                                 </div>
                             </div>
                         ))

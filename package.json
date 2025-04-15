@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "bad-words": "^4.0.0",
     "fuse.js": "^7.1.0",
     "googleapis": "^148.0.0",
     "mongodb": "^6.15.0"
