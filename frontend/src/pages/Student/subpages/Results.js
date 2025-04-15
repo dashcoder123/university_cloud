@@ -6,7 +6,6 @@ const Results = ({ branch, cgpa, percentage }) => {
   const [selectedYear, setSelectedYear] = useState('');
   const [pdfLink, setPdfLink] = useState('');
 
-  // Debug log to check props
   useEffect(() => {
   }, [branch, cgpa, percentage]);
 
@@ -67,6 +66,23 @@ const Results = ({ branch, cgpa, percentage }) => {
           <p><strong>Current Percentage:</strong> {percentage || 'N/A'}</p>
           <p><strong>Current CGPA:</strong> {cgpa || 'N/A'} CGPA</p>
         </div>
+      </div>
+
+      {/* Revaluation link at the bottom */}
+      <div className="revaluation-link" style={{ textAlign: 'center', marginTop: '30px' }}>
+        <a
+          href="https://docs.google.com/forms/d/e/1FAIpQLScN3w-2Ynq4kFFZZVxO1BrgRVdHTWxT0olDgcJaYLGR_qOLRw/viewform?usp=dialog"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            color: '#0A2647',
+            fontWeight: 'bold',
+            textDecoration: 'underline',
+            fontSize: '18px'
+          }}
+        >
+          Apply for Revaluation
+        </a>
       </div>
     </div>
   );
