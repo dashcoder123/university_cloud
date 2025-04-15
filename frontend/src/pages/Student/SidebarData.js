@@ -1,5 +1,6 @@
 import React from 'react';
 import * as FaIcons from 'react-icons/fa';
+import { GiTalk } from "react-icons/gi";
 
 export const SidebarData = [
   {
@@ -30,6 +31,12 @@ export const SidebarData = [
     title: 'Community',
     path: '/student/dashboard/community',
     icon: <FaIcons.FaUsers />,
+    cName: 'nav-text'
+  },
+  {
+    title: 'TalkUMIT',
+    path: '/student/dashboard/talk',
+    icon: <GiTalk />,
     cName: 'nav-text'
   },
   {

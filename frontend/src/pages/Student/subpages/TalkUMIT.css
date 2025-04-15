@@ -1,0 +1,138 @@
+/* TalkUMIT.css */
+
+.talk-container {
+  max-width: 700px;
+  margin: 40px auto 20px;
+  padding: 30px;
+  background-color: #f5f9ff;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.talk-header {
+  font-size: 24px;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #004aad;
+}
+
+.talk-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.talk-form select,
+.talk-form textarea {
+  font-size: 16px;
+  padding: 14px;
+  border: 1px solid #c2d2e9;
+  border-radius: 8px;
+  resize: vertical;
+  background-color: #fff;
+}
+
+.talk-form select:focus,
+.talk-form textarea:focus {
+  border-color: #004aad;
+  outline: none;
+}
+
+.talk-form textarea {
+  min-height: 120px;
+}
+
+.button-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.talk-form button {
+  background-color: #004aad;
+  color: white;
+  padding: 12px 28px;
+  font-size: 16px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.talk-form button:hover {
+  background-color: #003a85;
+  transform: scale(1.05);
+}
+
+.status-msg {
+  text-align: center;
+  font-weight: bold;
+  color: green;
+}
+
+.chat-container {
+  max-width: 700px;
+  margin: 20px auto;
+  padding: 30px;
+  background-color: #fdfdfd;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.chat-header {
+  font-size: 22px;
+  margin-bottom: 15px;
+  color: #004aad;
+  text-align: center;
+}
+
+.chat-box {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.chat-message {
+  background-color: #e8f0fe;
+  padding: 20px;
+  border-radius: 10px;
+  border-left: 5px solid #004aad;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.message-content p {
+  margin: 5px 0;
+}
+
+.posted-by {
+  font-size: 14px;
+  color: #555;
+  text-align: right;
+  margin-top: 12px;
+  font-style: italic;
+}
+
+.no-messages {
+  text-align: center;
+  color: #999;
+  font-style: italic;
+}
+
+/* Filter Section */
+.filter-container {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.filter-container select {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #c2d2e9;
+  border-radius: 8px;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.filter-container select:focus {
+  border-color: #004aad;
+  outline: none;
+}

@@ -110,6 +110,17 @@ const Announcement = mongoose.model('Announcement', announcementSchema);
 
 module.exports = Announcement;
 
+// Talk Schema
+const talkSchema = new mongoose.Schema({
+  title: { type: String, required: true },
+  description: { type: String, required: true },
+  postedBy: { type: String, required: true },
+  timestamp: { type: Date, default: Date.now }
+});
+
+const Talk = mongoose.model('Talk', talkSchema);
+
+
 //Faculty Community
 
 const facultyAnnouncementSchema = new mongoose.Schema({
@@ -219,6 +230,34 @@ app.get('/api/attendances', async (req, res) => {
   }
 });
 
+// POST a new discussion post
+app.post('/api/talks', async (req, res) => {
+  const { title, description, postedBy } = req.body;
+
+  if (!title || !description || !postedBy) {
+    return res.status(400).json({ success: false, message: 'All fields are required' });
+  }
+
+  try {
+    const newTalk = new Talk({ title, description, postedBy });
+    await newTalk.save();
+    res.status(201).json({ success: true, message: 'Discussion post created successfully' });
+  } catch (error) {
+    console.error('Error creating discussion post:', error);
+    res.status(500).json({ success: false, message: 'Server error' });
+  }
+});
+
+// GET all discussion posts
+app.get('/api/talks', async (req, res) => {
+  try {
+    const talks = await Talk.find().sort({ timestamp: -1 }); // Sorting by timestamp in descending order (most recent first)
+    res.json({ success: true, talks });
+  } catch (error) {
+    console.error('Error fetching discussion posts:', error);
+    res.status(500).json({ success: false, message: 'Server error' });
+  }
+});
 
 
 // Students fetch announcements
