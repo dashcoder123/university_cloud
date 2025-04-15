@@ -12,7 +12,7 @@ const TalkUMIT = ({ studentName }) => {
 
     // Hindi abusive words list
     const hindiProfanities = [
-        'kutti', 'chutiya', 'chu', 'randi', 'bdsk', 'msdk', 'maa ki', // Add more words as needed
+        'kutti', 'chutiya', 'gandu', 'gandu', 'chu', 'randi', 'bdsk', 'msdk', 'f off', 'dumb', 'idiot', 'crazy', 'stupid', 'maa ki', // Add more words as needed
     ];
 
     // Function to check for Hindi profanities
