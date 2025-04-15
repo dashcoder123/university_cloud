@@ -84,11 +84,11 @@ const Academics = ({ year, branch }) => {
         {/* Notes and PYQs */}
         <div className="academics-box">
           <h2>PYQ and Notes:</h2>
-          <p><strong>Cloud Computing</strong> <FiLink /></p>
-          <p><strong>Computer Network Security</strong> <FiLink /></p>
-          <p><strong>Computational Data Analytics</strong> <FiLink /></p>
-          <p><strong>Game Theory</strong> <FiLink /></p>
-          <p><strong>TCPE</strong> <FiLink /></p>
+          <p><strong><a href="https://www.google.com" target="_blank" rel="noopener noreferrer">Cloud Computing</a></strong> <FiLink /></p>
+          <p><strong><a href="https://www.google.com" target="_blank" rel="noopener noreferrer">Computer Network Security</a></strong> <FiLink /></p>
+          <p><strong><a href="https://www.google.com" target="_blank" rel="noopener noreferrer">Computational Data Analytics</a></strong> <FiLink /></p>
+          <p><strong><a href="https://www.google.com" target="_blank" rel="noopener noreferrer">Game Theory</a></strong> <FiLink /></p>
+          <p><strong><a href="https://www.google.com" target="_blank" rel="noopener noreferrer">TCPE</a></strong> <FiLink /></p>
         </div>
       </div>
     </div>

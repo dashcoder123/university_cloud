@@ -6,7 +6,6 @@ const TeachingMaterial = ({ id }) => {
   const [teachingInfo, setTeachingInfo] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [setSyllabusLink] = useState('');
 
   useEffect(() => {
     const fetchTeachingInfo = async () => {
@@ -25,19 +24,9 @@ const TeachingMaterial = ({ id }) => {
     }
   }, [id]);
 
-  // Fetch the syllabus link when button is clicked
-  const fetchSyllabusLink = async (courseId) => {
-    try {
-      const response = await axios.get(`http://localhost:8081/api/syllabus/${courseId}`);
-      if (response.data.success) {
-        setSyllabusLink(response.data.syllabusLink);
-        window.open(response.data.syllabusLink, '_blank');
-      } else {
-        setError('Syllabus not found');
-      }
-    } catch (err) {
-      setError('Failed to fetch syllabus');
-    }
+  // Now, just use the fixed link (Google link) directly when button is clicked
+  const openGoogleLink = () => {
+    window.open('https://docs.google.com/presentation/d/1O7REmcyrIIGdZOIm898c4OKKADYLhIzm/edit?usp=sharing&ouid=115047623495942414050&rtpof=true&sd=true', '_blank');
   };
 
   if (loading) return <div>Loading...</div>;
@@ -55,7 +44,7 @@ const TeachingMaterial = ({ id }) => {
             <p><strong>{info}</strong></p>
             <button 
               className="info-button" 
-              onClick={() => fetchSyllabusLink(info)}>View Material</button>
+              onClick={openGoogleLink}>View Material</button>
           </div>
         ))}
       </div>
