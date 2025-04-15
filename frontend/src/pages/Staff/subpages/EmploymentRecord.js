@@ -1,38 +1,27 @@
 import React, { useState } from 'react';
 import './EmploymentRecord.css';
-import { keystoneLogin } from './keystoneauth.js'; // ⬅️ Import login logic
 
 const EmploymentRecord = () => {
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [token, setToken] = useState('');
-  const [response, setResponse] = useState(null); // optional: holds extra Keystone user info
 
-  const handleLogin = async (e) => {
+  const handleLogin = (e) => {
     e.preventDefault();
 
-    // 🔵 Log the inputs received before sending to Keystone
-    console.log('🔵 Submitting login form with:');
-    console.log('Username (ID):', id);
-    console.log('Password: ', password);
-    console.log('Passed to keystonauth.js for api');
+    const validId = 'Account';
+    const validPassword = 'account@123';
 
-    try {
-      const { token, userData } = await keystoneLogin(id, password);
-
-      // Log successful response
-      console.log('Received token from Keystone:', token);
-      console.log('Received user data:', userData);
-
-      setToken(token);
-      setResponse(userData);
+    if (id === validId && password === validPassword) {
       setIsLoggedIn(true);
-    } catch (error) {
-      console.error('🔴 Keystone login error:', error);
-      alert('Login failed: ' + error.message);
+    } else {
+      alert('Invalid credentials. Please try again.');
     }
   };
+
+  // Construct dynamic URLs using the entered username
+  const budgetUrl = `https://e455-106-66-226-240.ngrok-free.app/v1/AUTH_test/${id}/Budget.pdf`;
+  const balanceSheetUrl = `https://e455-106-66-226-240.ngrok-free.app/v1/AUTH_test/${id}/Balancesheet.pdf`;
 
   return (
     <div className="container">
@@ -61,15 +50,23 @@ const EmploymentRecord = () => {
         </form>
       ) : (
         <div className="info-box">
-          <h2>Login successful!</h2>
-          <p>Welcome, user with Keystone username: <strong>{id}</strong></p>
-          <p><strong>Token:</strong> {token}</p>
-          {/* Optional: Show Keystone user details */}
-          {response && (
-            <pre style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>
-              {JSON.stringify(response, null, 2)}
-            </pre>
-          )}
+          <p>Welcome to <strong>{id}</strong></p>
+
+          {/* First Div Bar */}
+          <div className="record-section">
+            <h3>Budget</h3>
+            <a href={budgetUrl} target="_blank" rel="noopener noreferrer">
+              <button className="access-btn">View</button>
+            </a>
+          </div>
+
+          {/* Second Div Bar */}
+          <div className="record-section">
+            <h3>Balancesheet</h3>
+            <a href={balanceSheetUrl} target="_blank" rel="noopener noreferrer">
+              <button className="access-btn">View</button>
+            </a>
+          </div>
         </div>
       )}
     </div>
