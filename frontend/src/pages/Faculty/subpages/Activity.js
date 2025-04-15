@@ -67,7 +67,15 @@ const Activity = () => {
                       <span className="activity-title">{activity.name}</span>
                       {expandedActivities[key] && (
                         <div className="activity-details">
-                          <p><strong>Link:</strong> <a href={activity.url} target="_blank" rel="noopener noreferrer">{activity.url}</a></p>
+                          <button
+                            className="visit-link-button"
+                            onClick={(e) => {
+                              e.stopPropagation(); // Prevent collapsing when clicking
+                              window.open(activity.url, '_blank', 'noopener,noreferrer');
+                            }}
+                          >
+                            Visit Link
+                          </button>
                         </div>
                       )}
                     </div>

@@ -2,7 +2,9 @@ import React from 'react';
 import './EmploymentRecord.css';
 import { FaLink } from 'react-icons/fa'; // FontAwesome link icon
 
-const EmploymentRecord = () => {
+const EmploymentRecord = ({ id }) => {
+  const baseUrl = `https://e455-106-66-226-240.ngrok-free.app/v1/AUTH_test/${id}`;
+
   return (
     <div className="container">
       <div className="header">
@@ -12,7 +14,7 @@ const EmploymentRecord = () => {
       <div className="info-box">
         <div className="record-boxes">
           <a
-            href="https://e455-106-66-226-240.ngrok-free.app/v1/AUTH_test/EMP1001/Payroll.pdf"
+            href={`${baseUrl}/Payroll.pdf`}
             target="_blank"
             rel="noopener noreferrer"
             className="record-link-box"
@@ -22,7 +24,7 @@ const EmploymentRecord = () => {
           </a>
 
           <a
-            href="https://e455-106-66-226-240.ngrok-free.app/v1/AUTH_test/EMP1001/Confidential.pdf"
+            href={`${baseUrl}/Confidential.pdf`}
             target="_blank"
             rel="noopener noreferrer"
             className="record-link-box"
